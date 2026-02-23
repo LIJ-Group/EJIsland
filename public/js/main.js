@@ -9,9 +9,11 @@ window.toggleCode = toggleCode;
 
 function checkAdminAccess() {
     const adminSection = document.getElementById('review');
-    const adminLink = document.querySelector('.sidebar-nav a[href="#review"]');
+    const adminLink = document.getElementById('reviewNavLink');
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdmin = urlParams.get('admin') === 'true' || window.location.hash === '#admin';
     
-    if (window.location.hash === '#admin') {
+    if (isAdmin) {
         if (adminSection) {
             adminSection.style.display = 'block';
         }
@@ -26,7 +28,12 @@ function checkAdminAccess() {
             adminLink.style.display = 'none';
         }
     }
+    
+    return isAdmin;
 }
+
+export const isAdmin = checkAdminAccess();
+window.isAdmin = isAdmin;
 
 async function initApp() {
     checkAdminAccess();

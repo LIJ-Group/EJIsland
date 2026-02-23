@@ -1,1 +1,121 @@
-[]
+[
+  {
+    "elements": ["冰", "火"],
+    "name": "融化",
+    "multiplier": "2.5倍",
+    "effect": "造成大量火属性伤害，移除冰元素附着",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["冰", "水"],
+    "name": "冻结",
+    "multiplier": "1.0倍",
+    "effect": "冻结敌人，使其无法行动",
+    "duration": "4秒"
+  },
+  {
+    "elements": ["冰", "雷"],
+    "name": "超导",
+    "multiplier": "1.5倍",
+    "effect": "造成范围冰属性伤害，降低敌人物理抗性",
+    "duration": "8秒"
+  },
+  {
+    "elements": ["火", "水"],
+    "name": "蒸发",
+    "multiplier": "2.5倍",
+    "effect": "造成大量火属性伤害，移除水元素附着",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["火", "雷"],
+    "name": "超载",
+    "multiplier": "1.6倍",
+    "effect": "造成爆炸伤害，击退敌人",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["火", "草"],
+    "name": "燃烧",
+    "multiplier": "1.0倍",
+    "effect": "造成持续火属性伤害",
+    "duration": "8秒"
+  },
+  {
+    "elements": ["雷", "水"],
+    "name": "感电",
+    "multiplier": "1.5倍",
+    "effect": "造成持续雷属性伤害，可扩散到周围敌人",
+    "duration": "8秒"
+  },
+  {
+    "elements": ["雷", "草"],
+    "name": "激化",
+    "multiplier": "2.0倍",
+    "effect": "进入激化状态，期间雷元素伤害倍率×1.5，草元素伤害倍率×2",
+    "duration": "8秒"
+  },
+  {
+    "elements": ["水", "草"],
+    "name": "绽放",
+    "multiplier": "1.0倍",
+    "effect": "产生草原核，接触火元素会爆炸，接触雷元素会产生蔓生",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["风", "火"],
+    "name": "扩散-火",
+    "multiplier": "1.2倍",
+    "effect": "扩散火元素，造成范围伤害",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["风", "冰"],
+    "name": "扩散-冰",
+    "multiplier": "1.2倍",
+    "effect": "扩散冰元素，造成范围伤害",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["风", "雷"],
+    "name": "扩散-雷",
+    "multiplier": "1.2倍",
+    "effect": "扩散雷元素，造成范围伤害",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["风", "水"],
+    "name": "扩散-水",
+    "multiplier": "1.2倍",
+    "effect": "扩散水元素，造成范围伤害",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["岩", "火"],
+    "name": "结晶-火",
+    "multiplier": "1.0倍",
+    "effect": "产生火元素结晶，拾取后获得火元素护盾",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["岩", "冰"],
+    "name": "结晶-冰",
+    "multiplier": "1.0倍",
+    "effect": "产生冰元素结晶，拾取后获得冰元素护盾",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["岩", "雷"],
+    "name": "结晶-雷",
+    "multiplier": "1.0倍",
+    "effect": "产生雷元素结晶，拾取后获得雷元素护盾",
+    "duration": "0秒"
+  },
+  {
+    "elements": ["岩", "水"],
+    "name": "结晶-水",
+    "multiplier": "1.0倍",
+    "effect": "产生水元素结晶，拾取后获得水元素护盾",
+    "duration": "0秒"
+  }
+]

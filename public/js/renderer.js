@@ -29,6 +29,10 @@ export function createWeaponCard(item) {
 }
 
 export function toggleCode(codeId, toggle) {
+    if (!window.isAdmin) {
+        alert('权限不足，无法查看服务器代码');
+        return;
+    }
     const content = document.getElementById(codeId);
     if (!content) {
         console.error('Code content not found:', codeId);
@@ -288,32 +292,172 @@ export function renderDamage() {
     const damageContent = document.getElementById('damage-content');
     if (!damageContent) return;
 
+    const damageCodeId = 'damage-code-' + Date.now();
     const damageHTML = `
-        <div class="info-box">
-            <h3>伤害计算公式</h3>
-            <div class="formula-box">
-                <p class="formula">基础伤害 = 攻击力 × 技能倍率 × 伤害加成</p>
-                <p class="formula">最终伤害 = 基础伤害 × (1 - 防御力减免) × (1 - 元素抗性减免)</p>
-            </div>
-        </div>
         <div class="info-box">
             <h3>伤害类型</h3>
             <ul>
-                <li>物理伤害 - 基于角色的物理攻击力和武器伤害</li>
-                <li>元素伤害 - 基于角色的元素精通和元素伤害加成（火、冰、雷、风、草、岩、水）</li>
-                <li>真实伤害 - 无视防御和抗性，直接造成固定伤害</li>
+                <li><strong>0：物理伤害</strong></li>
+                <li><strong>1：冰</strong></li>
+                <li><strong>2：火</strong></li>
+                <li><strong>3：电</strong></li>
+                <li><strong>4：风</strong></li>
+                <li><strong>5：生命</strong></li>
+                <li><strong>6：大地</strong></li>
+                <li><strong>7：水</strong></li>
+                <li><strong>8：空间</strong></li>
+                <li><strong>9：光明</strong></li>
+                <li><strong>10：黑暗</strong></li>
+                <li><strong>11：时间</strong></li>
+                <li><strong>12：摔落伤害</strong></li>
             </ul>
         </div>
         <div class="info-box">
-            <h3>伤害加成因素</h3>
-            <ul>
-                <li>武器伤害和攻击力</li>
-                <li>元素伤害加成（来自武器、圣遗物、角色天赋）</li>
-                <li>暴击率和暴击伤害</li>
-                <li>元素精通（影响元素反应伤害）</li>
-                <li>敌人弱点和抗性</li>
-                <li>队伍元素共鸣效果</li>
-            </ul>
+            <h3>伤害计算公式</h3>
+            <div class="formula-box">
+                <div class="formula-title">1. 防御力减免</div>
+                <div class="formula-content">
+                    <p class="formula">scale = this.def[type] 或 1（默认值）</p>
+                    <p class="formula">若为物理伤害且有超导效果：scale += 0.2</p>
+                    <p class="formula">若有对应元素抗性减免：scale += this.effect[type + 9].params.power</p>
+                    <p class="formula">伤害 = 伤害 × scale</p>
+                </div>
+            </div>
+            <div class="formula-box">
+                <div class="formula-title">2. 玩家间伤害衰减</div>
+                <div class="formula-content">
+                    <p class="formula">若攻击者和受击者都是玩家：</p>
+                    <p class="formula">伤害 = 0.05 × 伤害 + 30 × ln(0.1 × 伤害 + 1)</p>
+                </div>
+            </div>
+            <div class="formula-box">
+                <div class="formula-title">3. 元素反应</div>
+                <div class="formula-content">
+                    <p class="formula">伤害 = 伤害 × elementEffect(this, type, power, 伤害, attacker)</p>
+                </div>
+            </div>
+            <div class="formula-box">
+                <div class="formula-title">4. 护盾吸收</div>
+                <div class="formula-content">
+                    <p class="formula">reduction = max(所有护盾的hp)</p>
+                    <p class="formula">伤害 = 伤害 - min(伤害, reduction)</p>
+                </div>
+            </div>
+            <div class="formula-box">
+                <div class="formula-title">5. 暴击计算</div>
+                <div class="formula-content">
+                    <p class="formula">暴击率 = 0（基础值）</p>
+                    <p class="formula">若有装备75（暴击头）：暴击率 += 0.3</p>
+                    <p class="formula">若敌人被冻结且攻击者有冰甲：暴击率 += 0.2</p>
+                    <p class="formula">暴击率 += getCritRate(attacker)</p>
+                    <p class="formula">暴击伤害 = 1.5 + getCritDMG(attacker)</p>
+                    <p class="formula">若有装备77（暴击头）：伤害 ×= 1.1</p>
+                    <p class="formula">若随机数 < 暴击率：伤害 ×= 暴击伤害</p>
+                </div>
+            </div>
+        </div>
+        <div class="info-box">
+            <h3>GameEntity.prototype.damage 源代码</h3>
+            <div class="weapon-code-section">
+                <div class="weapon-code-toggle" onclick="toggleCode('${damageCodeId}', this)">
+                    <span class="toggle-text">📜 <span class="toggle-label">查看服务器代码</span></span>
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="weapon-code-content" id="${damageCodeId}">
+                    <div class="weapon-code"><pre>GameEntity.prototype.damage = function(hp, attacker, type, power = 5 /* 元素攻击强度 */) {
+    /*
+    伤害类型：
+    0：物理伤害
+    1：冰
+    2：火
+    3：电
+    4：风
+    5：生命
+    6：大地
+    7：水
+    8：空间
+    9：光明
+    10：黑暗
+    11：时间
+    12：摔落伤害
+    */
+    if (attacker && shieldBlock(this, attacker)) {
+        return;
+    }
+    if (this.def) {
+        let scale = (this.def[type] || this.def[type] === 0) ? this.def[type] : 1;
+        if (!type && this.effect[8]) {
+            scale += 0.2;
+        }
+        if (RESREDUCING.includes(type) && this.effect[type + 9]) {
+            scale += this.effect[type + 9].params.power;
+        }
+        hp *= scale;
+    }
+    if (this.isPlayer && attacker && attacker.isPlayer) {
+        hp = 0.05 * hp + 30 * Math.log(0.1 * hp + 1);
+    }
+    hp *= elementEffect(this, type, power, hp, attacker);
+    if (type !== 12 && this.shields) {
+        let reduction = 0;
+        for (const e of this.shields) {
+            reduction = Math.max(e.hp, reduction);
+            CMD.crackShield(this, e, hp);
+        }
+        hp -= Math.min(hp, reduction);
+    }
+    if (hp > 0) {
+        if (this.skills) {
+            for (const e of this.skills) {
+                if (Skill[e.id].takeDamage) {
+                    Skill[e.id].takeDamage({entity: this, level: e.level, dmg: hp, attacker});
+                }
+            }
+        }
+        let critRate = 0;
+        let critDMG = 1.5;
+        if (attacker) {
+            if (getEquip(attacker, 75)) {
+                critRate += 0.3;
+            }
+            if (isFrozen(this) && icyArmor(attacker)) {
+                critRate += 0.2;
+            }
+            if (getEquip(attacker, 77)) {
+                hp *= 1.1;
+            }
+            critRate += getCritRate(attacker);
+            critDMG += getCritDMG(attacker);
+        }
+        if (Math.random() < critRate) {
+            hp *= critDMG;
+        }
+        this.hurt(hp, {attacker});
+    }
+    if (this && this.isPlayer && type != 12) {
+        crackEquip(this);
+    }
+    if (attacker && attacker.isPlayer) {
+        crackWeapon(attacker);
+    }
+    return true;
+}</pre></div>
+                </div>
+            </div>
+        </div>
+        <div class="info-box">
+            <h3>伤害处理流程</h3>
+            <ol>
+                <li><strong>护盾检查</strong>：首先检查是否有护盾阻止伤害</li>
+                <li><strong>防御力减免</strong>：根据目标的防御属性计算伤害减免</li>
+                <li><strong>玩家间伤害衰减</strong>：玩家对玩家造成的伤害会被衰减</li>
+                <li><strong>元素反应</strong>：调用 elementEffect 函数处理元素反应</li>
+                <li><strong>护盾吸收</strong>：护盾会吸收部分伤害</li>
+                <li><strong>技能触发</strong>：触发受击者的相关技能</li>
+                <li><strong>暴击计算</strong>：计算暴击率和暴击伤害</li>
+                <li><strong>造成伤害</strong>：调用 hurt 函数实际造成伤害</li>
+                <li><strong>装备损耗</strong>：装备会受到损耗</li>
+            </ol>
         </div>
     `;
 
@@ -324,49 +468,31 @@ export function renderElement() {
     const elementContent = document.getElementById('element-content');
     if (!elementContent) return;
 
-    const elementHTML = `
+    let elementGridHTML = `
         <h3>元素类型</h3>
         <div class="element-grid">
+    `;
+
+    elementData.forEach(element => {
+        const elementClass = element.name === '火' ? 'element-fire' :
+                            element.name === '冰' ? 'element-ice' :
+                            element.name === '雷' ? 'element-thunder' :
+                            element.name === '岩' ? 'element-earth' :
+                            element.name === '风' ? 'element-wind' :
+                            element.name === '水' ? 'element-water' :
+                            element.name === '草' ? 'element-grass' :
+                            element.name === '毒' ? 'element-poison' : '';
+
+        elementGridHTML += `
             <div class="element-item">
-                <div class="element-icon element-fire">火</div>
-                <h4>火</h4>
-                <p>造成持续燃烧伤害，融化冰元素</p>
+                <div class="element-icon ${elementClass}">${element.icon}</div>
+                <h4>${element.name}</h4>
+                <p>${element.desc}</p>
             </div>
-            <div class="element-item">
-                <div class="element-icon element-ice">冰</div>
-                <h4>冰</h4>
-                <p>冻结敌人，降低移动速度</p>
-            </div>
-            <div class="element-item">
-                <div class="element-icon element-thunder">雷</div>
-                <h4>雷</h4>
-                <p>造成麻痹，连锁电击效果</p>
-            </div>
-            <div class="element-item">
-                <div class="element-icon element-earth">岩</div>
-                <h4>岩</h4>
-                <p>增强防御，造成物理溅射伤害</p>
-            </div>
-            <div class="element-item">
-                <div class="element-icon element-wind">风</div>
-                <h4>风</h4>
-                <p>扩散其他元素，造成范围伤害</p>
-            </div>
-            <div class="element-item">
-                <div class="element-icon element-water">水</div>
-                <h4>水</h4>
-                <p>潮湿敌人，与其他元素产生反应</p>
-            </div>
-            <div class="element-item">
-                <div class="element-icon element-grass">草</div>
-                <h4>草</h4>
-                <p>造成植物生长效果，与水元素产生反应</p>
-            </div>
-            <div class="element-item">
-                <div class="element-icon element-poison">毒</div>
-                <h4>剧毒</h4>
-                <p>造成持续毒素伤害，降低敌人生命恢复</p>
-            </div>
+        `;
+    });
+
+    elementGridHTML += `
         </div>
 
         <h3>基础元素反应效果及倍率</h3>
@@ -382,90 +508,23 @@ export function renderElement() {
                 </tr>
             </thead>
             <tbody>
+    `;
+
+    elementReactionData.forEach(reaction => {
+        elementGridHTML += `
                 <tr>
-                    <td>火 + 水</td>
-                    <td>蒸发</td>
-                    <td>2.0倍</td>
-                    <td>造成大量水属性伤害，移除元素附着</td>
-                    <td>0秒</td>
+                    <td>${reaction.elements.join(' + ')}</td>
+                    <td>${reaction.name}</td>
+                    <td>${reaction.multiplier}</td>
+                    <td>${reaction.effect}</td>
+                    <td>${reaction.duration}</td>
                 </tr>
-                <tr>
-                    <td>火 + 冰</td>
-                    <td>融化</td>
-                    <td>2.0倍</td>
-                    <td>造成大量火属性伤害，移除元素附着</td>
-                    <td>0秒</td>
-                </tr>
-                <tr>
-                    <td>雷 + 水</td>
-                    <td>感电</td>
-                    <td>1.5倍</td>
-                    <td>造成持续雷属性伤害，持续期间每0.5秒触发一次</td>
-                    <td>4秒</td>
-                </tr>
-                <tr>
-                    <td>冰 + 水</td>
-                    <td>冻结</td>
-                    <td>1.2倍</td>
-                    <td>冻结敌人，使其无法移动和攻击</td>
-                    <td>3秒</td>
-                </tr>
-                <tr>
-                    <td>雷 + 火</td>
-                    <td>过载</td>
-                    <td>1.8倍</td>
-                    <td>造成范围爆炸伤害，对周围敌人造成伤害</td>
-                    <td>0秒</td>
-                </tr>
-                <tr>
-                    <td>风 + 任意元素</td>
-                    <td>扩散</td>
-                    <td>1.3倍</td>
-                    <td>将元素扩散到周围敌人，造成对应元素伤害</td>
-                    <td>0秒</td>
-                </tr>
-                <tr>
-                    <td>岩 + 任意元素</td>
-                    <td>结晶</td>
-                    <td>1.1倍</td>
-                    <td>生成对应元素的护盾，吸收伤害</td>
-                    <td>8秒</td>
-                </tr>
-                <tr>
-                    <td>草 + 水</td>
-                    <td>绽放</td>
-                    <td>1.4倍</td>
-                    <td>生成草元素核，爆炸造成范围伤害</td>
-                    <td>0秒</td>
-                </tr>
-                <tr>
-                    <td>草 + 雷</td>
-                    <td>激化</td>
-                    <td>1.6倍</td>
-                    <td>提升后续元素伤害</td>
-                    <td>6秒</td>
-                </tr>
-                <tr>
-                    <td>剧毒 + 任意元素</td>
-                    <td>毒化</td>
-                    <td>1.2倍</td>
-                    <td>将剧毒元素附着于其他元素上，造成持续伤害</td>
-                    <td>5秒</td>
-                </tr>
+        `;
+    });
+
+    elementGridHTML += `
             </tbody>
         </table>
-        </div>
-
-        <div class="formula-box">
-            <div class="formula-title">元素反应伤害计算详解</div>
-            <div class="formula-content">
-反应伤害 = 
-    触发角色基础攻击力 
-    × (1 + 元素伤害加成%) 
-    × (1 + 元素精通/200) 
-    × 反应倍率 
-    × 敌人元素抗性系数</div>
-            <div class="formula-note">说明：角色等级也会影响元素反应基础伤害，等级越高基础伤害越高</div>
         </div>
 
         <div class="tip-box">
@@ -477,12 +536,11 @@ export function renderElement() {
                 <li><strong>岩元素护盾</strong>：结晶反应生成的护盾可以吸收大量伤害</li>
                 <li><strong>元素克制</strong>：了解敌人的元素弱点，选择对应的元素攻击</li>
                 <li><strong>连续反应</strong>：某些反应之间可以连续触发，造成连锁伤害</li>
-                <li><strong>元素精通堆集</strong>：以元素反应为主的角色应优先堆集元素精通属性</li>
             </ul>
         </div>
     `;
 
-    elementContent.innerHTML = elementHTML;
+    elementContent.innerHTML = elementGridHTML;
 }
 
 export function renderSkills() {
@@ -622,7 +680,7 @@ export function renderGrowth() {
                     <tr><td>草刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
                     <tr><td>雷刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
                     <tr><td>飓风之杖</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>渊界撕裂者</td><td>90级</td><td>残响碎片</td><td>375 + 当前等级 × 150</td></tr>
+                    <tr><td>渊界撕裂者</td><td>90级</td><td>机械碎片</td><td>375 + 当前等级 × 150</td></tr>
                 </table>
             </div>
             <p class="formula-note">
@@ -655,11 +713,11 @@ export function renderGrowth() {
                     <tr><td>15级突破</td><td>破碎冰晶 × 64、泥潭水晶 × 64、冰皇之冕 × 10、机械之心 × 10</td></tr>
                     <tr><td>20级突破</td><td>严寒冰晶 × 20、坚石之核 × 20、冰皇之冕 × 15、机械之心 × 15、剧毒之心 × 15</td></tr>
                     <tr><td>25级突破</td><td>严寒冰晶 × 64、坚石之核 × 64、灵魂之骨 × 64、冰皇之冕 × 15、机械之心 × 15、剧毒之心 × 20</td></tr>
-                    <tr><td>30级突破</td><td>冰冷核心 × 20、磐岩之心 × 20、骨骸核心 × 20、雪怪水晶 × 100、冰皇之冕 × 20、机械之心 × 20、剧毒之心 × 25</td></tr>
-                    <tr><td>35级突破</td><td>鸣雷能量存储核心 × 20、冰冷核心 × 20、磐岩之心 × 20、骨骸核心 × 20、雪怪水晶 × 20、冰皇之冕 × 20、剧毒之心 × 20</td></tr>
-                    <tr><td>40级突破</td><td>鸣雷能量存储核心 × 25、冰冷核心 × 20、磐岩之心 × 20、骨骸核心 × 20、雪怪水晶 × 35、冰皇之冕 × 35、剧毒之心 × 35</td></tr>
-                    <tr><td>45级突破</td><td>鸣雷能量存储核心 × 32、冰冷核心 × 25、磐岩之心 × 25、骨骸核心 × 25、雪怪水晶 × 20、冰皇之冕 × 20、剧毒之心 × 20、赤焰之心 × 20</td></tr>
-                    <tr><td>50级突破</td><td>鸣雷能量存储核心 × 32、冰冷核心 × 32、磐岩之心 × 32、骨骸核心 × 32、雪怪水晶 × 25、冰皇之冕 × 25、剧毒之心 × 25、赤焰之心 × 25</td></tr>
+                    <tr><td>30级突破</td><td>冰冷核心 × 20、磐岩之心 × 20、灵魂之骨 × 20、雪怪水晶 × 100、冰皇之冕 × 20、机械之心 × 20、剧毒之心 × 25</td></tr>
+                    <tr><td>35级突破</td><td>鸣雷能量存储核心 × 20、冰冷核心 × 20、磐岩之心 × 20、灵魂之骨 × 20、雪怪水晶 × 20、冰皇之冕 × 20、剧毒之心 × 20</td></tr>
+                    <tr><td>40级突破</td><td>鸣雷能量存储核心 × 25、冰冷核心 × 20、磐岩之心 × 20、灵魂之骨 × 20、雪怪水晶 × 35、冰皇之冕 × 35、剧毒之心 × 35</td></tr>
+                    <tr><td>45级突破</td><td>鸣雷能量存储核心 × 32、冰冷核心 × 25、磐岩之心 × 25、灵魂之骨 × 25、雪怪水晶 × 20、冰皇之冕 × 20、剧毒之心 × 20、赤焰之心 × 20</td></tr>
+                    <tr><td>50级突破</td><td>鸣雷能量存储核心 × 32、冰冷核心 × 32、磐岩之心 × 32、灵魂之骨 × 32、雪怪水晶 × 25、冰皇之冕 × 25、剧毒之心 × 25、赤焰之心 × 25</td></tr>
                     <tr><td>55级突破</td><td>鸣雷能量存储核心 × 20、剧毒之心 × 30、赤焰之心 × 30、净水的源初 × 30、爆炎之心 × 30</td></tr>
                     <tr><td>60级突破</td><td>鸣雷能量存储核心 × 64、剧毒之心 × 64、赤焰之心 × 64、净水的源初 × 30、爆炎之心 × 30</td></tr>
                     <tr><td>65级突破</td><td>净水的源初 × 45、爆炎之心 × 45、赤焰之心 × 40、渊界之域的记忆 × 1</td></tr>
@@ -723,28 +781,6 @@ export function renderQuests() {
             <li>获得渊界撕裂者作为奖励</li>
             <li>准备迎接更大的挑战</li>
         </ol>
-
-        <div class="info-box">
-            <h3>支线任务</h3>
-            <ul>
-                <li>每日委托：完成日常任务，获得稳定奖励</li>
-                <li>世界任务：探索世界，发现隐藏的故事和宝藏</li>
-                <li>声望任务：提升各区域声望，解锁区域特色奖励</li>
-                <li>活动任务：参与限时活动，获得限定奖励</li>
-            </ul>
-            <p>完成支线任务，获得额外奖励和剧情信息，深入了解游戏世界</p>
-        </div>
-        <div class="info-box">
-            <h3>任务奖励</h3>
-            <ul>
-                <li>经验值：提升角色等级</li>
-                <li>摩拉：游戏内通用货币</li>
-                <li>材料：用于升级和突破</li>
-                <li>装备：武器、护甲和圣遗物</li>
-                <li>声望：解锁区域特色内容</li>
-                <li>成就：解锁成就系统和称号</li>
-            </ul>
-        </div>
     `;
 
     questsContent.innerHTML = questsHTML;

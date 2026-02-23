@@ -1,5 +1,34 @@
 export function initUI() {
     const menuToggle = document.getElementById('menuToggle');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    function updateActiveNav() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            // 只对可见的菜单项进行操作
+            if (link.offsetParent !== null) {
+                // 检查是否已经有手动激活的菜单项
+                const manuallyActivated = link.classList.contains('manually-activated');
+                if (!manuallyActivated) {
+                    link.classList.remove('active');
+                    if (linkHref === '#' + current) {
+                        link.classList.add('active');
+                    }
+                }
+            }
+        });
+    }
+
     if (menuToggle) {
         menuToggle.addEventListener('click', function() {
             const sidebar = document.querySelector('.sidebar');
@@ -17,6 +46,19 @@ export function initUI() {
                 e.preventDefault();
                 const targetId = href.substring(1);
                 const target = document.getElementById(targetId);
+                
+                // 保存当前激活的菜单项
+                const currentActive = targetId;
+                
+                // 移除所有激活状态和手动标记
+                navLinks.forEach(l => {
+                    l.classList.remove('active');
+                    l.classList.remove('manually-activated');
+                });
+                
+                // 添加激活状态和手动标记
+                this.classList.add('active');
+                this.classList.add('manually-activated');
                 
                 if (target) {
                     const offsetTop = target.offsetTop - 40;
@@ -90,26 +132,8 @@ export function initUI() {
         });
     }
 
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.sidebar-nav a');
-
     if (navLinks.length > 0) {
-        window.addEventListener('scroll', function() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop - 150) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
     }
 }
