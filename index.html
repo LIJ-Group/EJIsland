@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异界之岛 - 旅行者指南</title>
+    <link rel="icon" href="public/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="public/images/LOGO.png" alt="异界之岛 Logo" class="logo">
+                <h1>异界之岛</h1>
+                <p>旅行者指南</p>
+            </div>
+            <div class="global-search">
+                <div class="search-box">
+                    <input type="text" id="globalSearchInput" placeholder="搜索内容（按回车跳转）..." class="global-search-input">
+                    <button onclick="globalSearch()" class="global-search-button">搜索</button>
+                </div>
+                <div id="globalSearchResults" class="global-search-results"></div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#intro">游戏简介</a>
+                <a href="#areas">区域介绍</a>
+                <a href="#enemies">敌人图鉴</a>
+                <a href="#weapons">武器系统</a>
+                <a href="#armor">护甲系统</a>
+                <a href="#damage">伤害计算</a>
+                <a href="#element">元素反应</a>
+                <a href="#skills">技能系统</a>
+                <a href="#growth">成长系统</a>
+                <a href="#items">物品系统</a>
+                <a href="#quests">主线任务</a>
+                <a href="#tips">新手指南</a>
+                <a href="#upload">上传词条</a>
+                <a href="#review" id="reviewNavLink">审核词条</a>
+                
+                <div class="dimension-section">
+                    <div class="dimension-title">维度</div>
+                    <a href="#echo-lands" class="dimension-link">残响之地</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>异界之岛</h1>
+                <p>踏上神秘的冒险之旅，成为优秀的魔法师</p>
+            </header>
+
+            <section id="intro">
+                <h2>游戏简介</h2>
+                <p>欢迎来到<span class="highlight">异界之岛</span>！这是一款充满魔法与冒险的RPG游戏，旅行者将扮演一名来自异世界的旅人，探索这个神秘岛屿的各个角落，与强大的敌人战斗，收集装备和资源，提升自身实力。</p>
+
+                <div class="info-box">
+                    <h3>核心玩法</h3>
+                    <ul>
+                        <li><strong>战斗系统</strong>：使用各种武器和技能击败敌人</li>
+                        <li><strong>等级系统</strong>：通过战斗和任务提升等级</li>
+                        <li><strong>装备系统</strong>：收集和升级武器、盔甲</li>
+                        <li><strong>传送系统</strong>：解锁传送锚点快速移动</li>
+                        <li><strong>任务系统</strong>：完成主线任务推进剧情</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h3>重要提示</h3>
+                    <p>游戏中有<span class="highlight">寒冷值</span>系统，在寒冷区域（如至北雪山）活动时，寒冷值会持续上升。当寒冷值达到80%时会收到警告，达到100%时将持续掉血，请务必注意保暖！</p>
+                </div>
+            </section>
+
+            <section id="areas">
+                <h2>区域介绍</h2>
+                <p>异界之岛包含多个独特的区域，每个区域都有其特色和挑战。</p>
+                <div class="area-grid" id="area-grid"></div>
+            </section>
+
+            <section id="echo-lands">
+                <h2>残响之地</h2>
+                <p>残响之地 是异界之岛上的一片无主区域，曾经是各大势力争夺的一片宝地，但由于受到了渊界之力的诅咒，使得该地区逐渐被忽视。但该地区仍有着许多昔日文明遗留的宝藏，吸引着许多魔法师、战士以及各大势力的精英前来争夺，导致这里变成了一片混乱的无主之地。
+由于该区域危险重重，人们研制出了一种传送法阵，在遇到危险的时候可以将人传送回来。但传送法阵的魔力有限，对于携带大量装备物资的人，便无法发挥它的作用。所以，老道的魔法师都会精打细算自己要携带的物品，在前往寻宝的过程中，尽可能保护下自己的物资。
+传送法阵在魔法师协会提供的基地里，而在残响之地上，你可以找到另外两种法阵，分别是运输法阵和撤离法阵。你可以使用运输法阵，将你背包里的一部分物品安全地送回你的私人仓库。使用撤离法阵，可以让你带着身上所有的物品返回魔法师协会提供的基地。</p>
+                <div class="info-box">
+                    <h3>区域状态</h3>
+                    <p>[暂未录入]</p>
+                </div>
+            </section>
+
+            <section id="enemies">
+                <h2>敌人图鉴</h2>
+                <p>异界之岛上栖息着各种危险的敌人，了解它们的特性才能更好地战斗。</p>
+
+                <h3>普通敌人</h3>
+
+                <h3>Boss敌人</h3>
+                <div class="enemy-grid" id="boss-enemies">
+                    <!-- Boss敌人卡片将在这里动态生成 -->
+                </div>
+            </section>
+
+            <section id="weapons">
+                <h2>武器系统</h2>
+                <p>武器是旅行者在异界之岛冒险的重要装备，不同的武器有不同的攻击方式和特点。</p>
+
+                <div class="info-box">
+                    <h3>武器升级说明</h3>
+                    <ul>
+                        <li><strong>可升级武器：</strong>大部分武器可以通过升级提升伤害和效果</li>
+                        <li><strong>不可升级武器：</strong>部分武器标有[不可升级]标记，无法进行升级</li>
+                        <li><strong>升级消耗：</strong>升级需要消耗材料和金币（具体消耗请在游戏中查看）</li>
+                        <li><strong>武器等级：</strong>武器等级越高，伤害和特殊效果越强</li>
+                    </ul>
+                </div>
+
+                <div class="weapon-grid" id="weapon-grid"></div>
+            </section>
+
+            <section id="armor">
+                <h2>护甲系统</h2>
+                <p>护甲是旅行者在异界之岛冒险的重要防御装备，可以减少受到的伤害。</p>
+                <div class="weapon-grid" id="armor-grid"></div>
+            </section>
+
+            <section id="items">
+                <h2>物品系统</h2>
+                <p>游戏中有丰富的物品系统，包括食物、材料等。</p>
+
+                <h3>词条搜索</h3>
+                <div class="info-box">
+                    <h3>搜索物品</h3>
+                    <p>输入物品名称或关键词，快速查找物品信息。</p>
+                    <div class="search-box">
+                        <input type="text" id="itemSearch" placeholder="搜索物品名称..." class="search-input">
+                        <button onclick="searchItems()" class="search-button">搜索</button>
+                    </div>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+            </section>
+
+            <section id="damage">
+                <h2>伤害计算</h2>
+                <p>了解游戏中的伤害计算机制，优化你的战斗策略。</p>
+                <div id="damage-content"></div>
+            </section>
+
+            <section id="element">
+                <h2>元素反应</h2>
+                <p>元素反应是游戏中的重要战斗机制，不同元素组合会产生不同的效果。</p>
+                <div id="element-content"></div>
+            </section>
+
+            <section id="skills">
+                <h2>技能系统</h2>
+                <p>技能是旅行者在异界之岛冒险的重要能力，不同的技能有不同的效果和用途。</p>
+                <div id="skills-content"></div>
+            </section>
+
+            <section id="growth">
+                <h2>成长系统</h2>
+                <p>了解游戏中的成长系统，提升你的角色实力。</p>
+                <div id="growth-content"></div>
+            </section>
+
+            <section id="quests">
+                <h2>主线任务</h2>
+                <p>完成主线任务，推进游戏剧情，探索异界之岛的秘密。</p>
+                <div id="quests-content"></div>
+            </section>
+
+            <section id="tips">
+                <h2>新手指南</h2>
+                <p>为新玩家提供的游戏指南，帮助你快速上手。</p>
+                <div id="tips-content"></div>
+            </section>
+
+            <section id="upload">
+                <h2>上传词条</h2>
+                <p>分享你的游戏经验和发现，为游戏社区贡献力量。</p>
+                <div id="upload-content"></div>
+            </section>
+
+            <section id="review">
+                <h2>审核词条</h2>
+                <p>审核用户上传的词条，确保内容质量。</p>
+                <div id="review-content"></div>
+            </section>
+        </main>
+    </div>
+
+    <div class="back-to-top" onclick="scrollToTopWithAnimation()"></div>
+
+    <script src="public/js/main.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+[
+  {
+    "name": "白银长枪",
+    "desc": "基础近战武器，适合新手使用。",
+    "type": "近战武器",
+    "rarity": "★",
+    "damage": "120 + 武器等级 × 40",
+    "get": "夜明镇购买",
+    "serverCode": "1: new ItemType(1, '白银长枪', 0).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/白银长枪.vb',offset: [0, -0.3, 0.4],scale: [0.4, 0.4, 0.4],orientation: Quat.rotateY(Math.PI).rotateZ(-0.5),}], 0, 340, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {if (world.currentTick - entity.lastAttack < 6) return;entity.lastAttack = world.currentTick;entity.sound('audio/sword2.mp3');}}).cd([cdA(6)])"
+  },
+  {
+    "name": "机械弩",
+    "desc": "远程武器，可以在安全距离攻击敌人。",
+    "type": "远程武器",
+    "rarity": "★",
+    "damage": "150 + 武器等级 × 50",
+    "get": "夜明镇购买、签到获得",
+    "serverCode": "2: new ItemType(2, '机械弩', 0).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/弩.vb',offset: [0, -0.3, 0.2],scale: [0.1, 0.1, 0.1],orientation: Quat.rotateZ(Math.PI * 0.5),}], 0, 340, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {if (world.currentTick - entity.lastAttack < 10) return;entity.lastAttack = world.currentTick;entity.sound('audio/拉开弓箭张开到射出音效_爱给网_aigei_com.mp3');}}).cd([cdA(10)])"
+  },
+  {
+    "name": "虚空之枪",
+    "desc": "蕴含虚空之力的长枪，攻击力极高。",
+    "type": "近战武器",
+    "rarity": "★★★★",
+    "damage": "200 + 武器等级 × 60",
+    "get": "鱼干商城购买",
+    "element": "暗",
+    "serverCode": "9: new ItemType(9, '虚空之枪', 3).cd([{cd(entity){if(entity.player.moveState == GamePlayerMoveState.SWIM){return 6;}return 25;},getCD(entity,cd){return Math.min(Math.max(world.currentTick - entity.lastAttack,0),cd);}}]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/重力之枪.vb',offset: [0, -0.3, 0.4],scale: [0.4, 0.4, 0.4],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-0.5),}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "冰系法杖",
+    "desc": "魔法武器，发射冰球造成冰冻伤害。",
+    "type": "魔法武器",
+    "rarity": "★★★",
+    "damage": "250 + 武器等级 × 80",
+    "get": "魔法师协会购买",
+    "element": "冰",
+    "serverCode": "13: new ItemType(13, '冰系法杖', 2).cd([cdA(25)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/冰系法杖.vb',offset: [0, -0.25, 0.4],scale: [0.2, 0.2, 0.2],orientation: Quat.rotateZ(-0.5),}], 0, 740, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {if (world.currentTick - entity.lastAttack < 25) return;entity.lastAttack = world.currentTick;entity.sound('audio/boost.mp3');}})"
+  },
+  {
+    "name": "岩刀",
+    "desc": "岩石制成的刀刃，沉重而锋利。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "180 + 武器等级 × 45",
+    "get": "西北山丘采集",
+    "element": "岩",
+    "serverCode": "14: new ItemType(14, '岩刀', 2).cd([cdA(6)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/岩刀.vb',offset: [0, -0.3, 0.5],scale: [0.2, 0.2, 0.2],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-0.5 - Math.PI * 0.5),}], 0, 740, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "岩枪",
+    "desc": "岩石制成的长矛，攻击范围广。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "180 + 武器等级 × 45",
+    "get": "西北山丘采集",
+    "element": "岩",
+    "serverCode": "15: new ItemType(15, '岩枪', 2).cd([cdA(6),cdA(20)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/岩枪.vb',offset: [0, -0.25, 0.4],scale: [0.25, 0.25, 0.25],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-0.5 - Math.PI * 0.5),}], 0, 740, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "炎刀",
+    "desc": "火焰包裹的刀刃，灼烧敌人。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "180 + 武器等级 × 45",
+    "get": "鹰崖城武器店购买",
+    "element": "火",
+    "serverCode": "25: new ItemType(25, '炎刀', 2).cd([cdA(6)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/炎刀.vb',}], 0, 740, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "狂涛之弓",
+    "desc": "水元素凝聚的长弓，箭矢带有水属性。",
+    "type": "远程武器",
+    "rarity": "★★★",
+    "damage": "200 + 武器等级 × 55",
+    "get": "寒冰之心宝箱、鹰崖城武器店购买",
+    "element": "水",
+    "serverCode": "34: new ItemType(34, '狂涛之弓', 3).cd([cdA(10)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/狂涛之弓.vb',}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "草刀",
+    "desc": "草元素凝聚的刀刃，可持续造成伤害。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "180 + 武器等级 × 45",
+    "get": "鹰崖城武器店购买",
+    "element": "草",
+    "serverCode": "37: new ItemType(37, '草刀', 2).cd([cdA(6)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/草刀.vb',}], 0, 740, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "雷刀",
+    "desc": "雷电凝聚的刀刃，攻击附带麻痹效果。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "180 + 武器等级 × 45",
+    "get": "鹰崖城武器店购买",
+    "element": "雷",
+    "serverCode": "38: new ItemType(38, '雷刀', 2).cd([cdA(6)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/雷刀.vb',}], 0, 740, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "飓风之杖",
+    "desc": "风元素凝聚的法杖，可释放风刃。",
+    "type": "魔法武器",
+    "rarity": "★★★",
+    "damage": "200 + 武器等级 × 55",
+    "get": "魔法师协会购买",
+    "element": "风",
+    "serverCode": "48: new ItemType(48, '飓风之杖', 3).cd([cdA(25),cdB(100)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "净水之刃",
+    "desc": "蕴含净化之力的神圣之刃。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "220 + 武器等级 × 55",
+    "get": "鱼干商城购买",
+    "element": "水",
+    "serverCode": "51: new ItemType(51, '净水之刃', 3).cd([cdA(6)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/净水之刃.vb',}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "铁斧",
+    "desc": "砍伐工具，可用于采集木材。",
+    "type": "工具武器",
+    "rarity": "★",
+    "damage": "基础伤害",
+    "get": "夜明镇购买",
+    "serverCode": "52: new ItemType(52, '铁斧', 1).cd([cdA(20)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,}], 0, 340, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "铁铲",
+    "desc": "挖掘工具，可用于采集泥土。",
+    "type": "工具武器",
+    "rarity": "★",
+    "damage": "基础伤害",
+    "get": "夜明镇购买",
+    "serverCode": "53: new ItemType(53, '铁铲', 1).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,}], 0, 340, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "铁镐",
+    "desc": "采矿工具，可用于采集矿石。",
+    "type": "工具武器",
+    "rarity": "★",
+    "damage": "基础伤害",
+    "get": "夜明镇购买",
+    "serverCode": "54: new ItemType(54, '铁镐', 1).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,}], 0, 340, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "铁镰",
+    "desc": "收割工具，可用于采集植物。",
+    "type": "工具武器",
+    "rarity": "★",
+    "damage": "基础伤害",
+    "get": "夜明镇购买",
+    "serverCode": "55: new ItemType(55, '铁镰', 1).cd([cdA(12)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,}], 0, 340, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "苍穹之上的星辰三叉戟",
+    "desc": "来自苍穹之上的神圣三叉戟，蕴含星辰之力。",
+    "type": "特殊武器",
+    "rarity": "★★★★",
+    "damage": "300 + 武器等级 × 75",
+    "get": "分享地图活动、鹰崖城武器店购买",
+    "element": "光",
+    "serverCode": "56: new ItemType(56, '苍穹之上的星辰三叉戟', 4).cd([{cd(entity){}}]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,}], 0, 1920, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "爆炎之杖",
+    "desc": "爆发性火焰法杖，可释放强大火球。",
+    "type": "魔法武器",
+    "rarity": "★★★",
+    "damage": "280 + 武器等级 × 85",
+    "get": "魔法师协会购买",
+    "element": "火",
+    "serverCode": "73: new ItemType(73, '爆炎之杖', 3).cd([cdA(25),cdB(100)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "剧毒螳螂刀",
+    "desc": "剧毒螳螂掉落的武器，攻击带有剧毒。",
+    "type": "近战武器",
+    "rarity": "★★★★",
+    "damage": "160 + 武器等级 × 40",
+    "get": "骷髅 [地方传奇·螳螂]概率掉落",
+    "element": "毒",
+    "serverCode": "78: new ItemType(78, '剧毒螳螂刀', 4).cd([cdA(3),cdB(200)]).toequip([], 0, 1920, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "寒冰拳套",
+    "desc": "冰属性拳套，攻击附带冰冻。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "170 + 武器等级 × 42",
+    "get": "合成",
+    "element": "冰",
+    "serverCode": "82: new ItemType(82, '寒冰拳套', 3).cd([cdA(5),cdB(200)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/寒冰拳套.vb',}, {bodyPart: GameBodyPart.LEFT_HAND,mesh: 'mesh/寒冰拳套.vb',}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "剧毒导弹发射器",
+    "desc": "发射剧毒导弹的远程武器。",
+    "type": "远程武器",
+    "rarity": "★★★★",
+    "damage": "280 + 武器等级 × 80",
+    "get": "骷髅 [地方传奇·重炮]概率掉落",
+    "element": "毒",
+    "serverCode": "89: new ItemType(89, '剧毒导弹发射器', 4).cd([cdA(25),cdB(50)]).toequip([], 0, 1920, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "撕裂锤",
+    "desc": "强大的撕裂之锤，破坏一切。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "400 + 武器等级 × 100",
+    "get": "不可获取",
+    "element": "岩",
+    "serverCode": "90: new ItemType(90, '撕裂锤', 3).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/撕裂锤.vb',}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "死神镰刀",
+    "desc": "死神的象征，收割生命的武器。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "350 + 武器等级 × 88",
+    "get": "不可获取",
+    "element": "暗",
+    "serverCode": "94: new ItemType(94, '死神镰刀', 3).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/死神镰刀.vb',}], 0, 1280, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "闪电螳螂刀",
+    "desc": "闪电螳螂的武器，释放闪电。",
+    "type": "近战武器",
+    "rarity": "★★★★",
+    "damage": "200 + 武器等级 × 50",
+    "get": "未知",
+    "element": "雷",
+    "serverCode": "10002: new ItemType(10002, '闪电螳螂刀', 4).cd([cdA(3),cdB(75)]).toequip([{bodyPart: GameBodyPart.RIGHT_LOWER_ARM,mesh: 'mesh/闪电螳螂刀.vb',}, {bodyPart: GameBodyPart.LEFT_LOWER_ARM,mesh: 'mesh/闪电螳螂刀.vb',}], 0, 1920, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "放电螳螂刀",
+    "desc": "放电螳螂的武器，释放闪电。",
+    "type": "近战武器",
+    "rarity": "★★★★★",
+    "damage": "150 + 武器等级 × 30",
+    "get": "鹰崖城武器店购买",
+    "element": "雷",
+    "serverCode": "157: new ItemType(157,'放电螳螂刀',4).cd([cdA(3),cdB(100)]).toequip([{ mesh: 'mesh/放电螳螂刀.vb', bodyPart: GameBodyPart.RIGHT_LOWER_ARM, orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(Math.PI * 0.5), offset: [0, 0, -0.2], scale: [0.8, 0.8, 0.8] }, { mesh: 'mesh/放电螳螂刀.vb', bodyPart: GameBodyPart.LEFT_LOWER_ARM, orientation: Quat.rotateY(-Math.PI * 0.5).rotateZ(Math.PI * 0.5), offset: [0, 0, -0.2], scale: [0.8, 0.8, 0.8] },], 8, 3960, (x) => { return `Lv${x.params.level}.${x.params.name}` }, null, null, {async'action0'({ entity, item }) {},'action1'({entity,item}){}})"
+  },
+  {
+    "name": "星杖",
+    "desc": "蕴含星辰之力的法杖。",
+    "type": "魔法武器",
+    "rarity": "★★★★",
+    "damage": "280 + 武器等级 × 57",
+    "get": "贝壳商人购买",
+    "element": "光",
+    "serverCode": "95: new ItemType(95,'星杖',3).cd([cdA(10),cdB(100)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/星杖.vb',offset: [0,-0.15,0.4],orientation: Quat.rotateZ(-0.3),scale: [0.5,0.5,0.5],}],0,2550,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,{async'action0'({entity,item}){}})"
+  },
+  {
+    "name": "熔火裂界",
+    "desc": "不可升级的武器，合成获得。",
+    "type": "特殊武器",
+    "rarity": "★★★",
+    "damage": "80 + 玩家等级 × 28",
+    "get": "合成",
+    "element": "火",
+    "serverCode": "10001: new ItemType(10001,'熔火裂界',2).cd([cdA(30)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/熔火裂界.vb',offset: [0, -0.25, 0.4],scale: [0.35, 0.35, 0.35],orientation: Quat.rotateZ(-Math.PI * 0.5 - 0.5),}], 0, 3960, (x) => { return `${x.params.name}` }, null, null, {async'action0'({entity,item}){}})"
+  },
+  {
+    "name": "REH振晶刀-长庚",
+    "desc": "联动活动武器。",
+    "type": "近战武器",
+    "rarity": "★★★★",
+    "damage": "750 + 武器等级 × 240",
+    "get": "联动活动获得",
+    "element": "火",
+    "serverCode": "123: new ItemType(123,'REH振晶刀-长庚',4).cd([cdA(9),cdB(60)]).toequip([{mesh: 'mesh/振晶刀.vb',offset: [0,-0.35,0.7],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-0.4),scale: [0.3,0.3,0.3],bodyPart: GameBodyPart.RIGHT_HAND,}],0,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,{'action0'({entity,item}){}})"
+  },
+  {
+    "name": "异星战锤",
+    "desc": "联动活动武器。",
+    "type": "近战武器",
+    "rarity": "★★★★",
+    "damage": "522 + 武器等级 × 88",
+    "get": "联动活动获得",
+    "element": "岩",
+    "serverCode": "122: new ItemType(122,'异星战锤',4).cd([cdA(20),cdB(60)]).toequip([{mesh: 'mesh/异星战锤.vb',offset: [0,-0.2,0.45],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-Math.PI * 0.5 - 0.4),scale: [0.4,0.4,0.4],bodyPart: GameBodyPart.RIGHT_HAND,}],8,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,{'action0'({entity,item}){},'action1'({entity,item}){}})"
+  },
+  {
+    "name": "骑士大剑",
+    "desc": "残响专属武器。",
+    "type": "近战武器",
+    "rarity": "★★",
+    "damage": "基础伤害",
+    "get": "残响专属武器",
+    "serverCode": "119: new ItemType(119,'骑士大剑',2).cd([cdA(15),cdA(8)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/大剑.vb',offset: [0,-0.35,0.7],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(Math.PI * 0.5 - 0.4),scale: [0.2,0.2,0.2],}],8,2550,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,largeSword(15,0,[[10,10,10],[10,10,10],[10,10,10],[10,10,10],[10,10,10]],[1,1,1,1]))"
+  },
+  {
+    "name": "淬火的骑士大剑",
+    "desc": "残响专属武器。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "基础伤害",
+    "get": "残响专属武器",
+    "element": "火",
+    "serverCode": "120: new ItemType(120,'淬火的骑士大剑',3).cd([cdA(10),cdA(8)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/淬火的大剑.vb',offset: [0,-0.35,0.7],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(Math.PI * 0.5 - 0.4),scale: [0.2,0.2,0.2],}],8,4330,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,largeSword(10,2,[[10,0.5,0.5],[5,0.1,0.1],[2,0.6,0.6],[10,0.2,0.2],[0.5,0,0]],[1,0.3,0.3,1]))"
+  },
+  {
+    "name": "坚岩的骑士大剑",
+    "desc": "残响专属武器。",
+    "type": "近战武器",
+    "rarity": "★★★",
+    "damage": "基础伤害",
+    "get": "残响专属武器",
+    "element": "岩",
+    "serverCode": "121: new ItemType(121,'坚岩的骑士大剑',3).cd([cdA(10),cdA(8)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/坚岩的大剑.vb',offset: [0,-0.35,0.7],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(Math.PI * 0.5 - 0.4),scale: [0.2,0.2,0.2],}],8,4330,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,largeSword(10,6,[[10,10,0.2],[0.5,0.5,0],[0.7,0.7,0.1],[2,2,0.2],[0.6,0.4,0.1]],[0.9,0.8,0.2,1]))"
+  },
+  {
+    "name": "机动射束炮-薪火",
+    "desc": "残响专属武器。",
+    "type": "远程武器",
+    "rarity": "★★★★",
+    "damage": "基础伤害",
+    "get": "残响专属武器",
+    "element": "火",
+    "serverCode": "124: new ItemType(124,'机动射束炮-薪火',4).cd([cdA(17),cdB(30)]).toequip([{mesh: 'mesh/机动射束炮_薪火.vb',offset: [0,-0.3,0.4],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-0.8),scale: [0.3,0.3,0.3],bodyPart: GameBodyPart.RIGHT_HAND,}],8,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},pickUpRaycasterConstructer('机动射束炮_薪火'),takeOffRaycaster,raycaster(2,new GameRGBAColor(1,0.4,0.4,0.8),[[1,0.4,0.2],[0.5,0.1,0],[2,0.5,0.3]]))"
+  },
+  {
+    "name": "机动射束炮-天汐",
+    "desc": "残响专属武器。",
+    "type": "远程武器",
+    "rarity": "★★★★",
+    "damage": "基础伤害",
+    "get": "残响专属武器",
+    "element": "水",
+    "serverCode": "125: new ItemType(125,'机动射束炮-天汐',4).cd([cdA(17),cdB(30)]).toequip([{mesh: 'mesh/机动射束炮_天汐.vb',offset: [0,-0.3,0.4],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-0.8),scale: [0.3,0.3,0.3],bodyPart: GameBodyPart.RIGHT_HAND,}],8,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},pickUpRaycasterConstructer('机动射束炮_天汐'),takeOffRaycaster,raycaster(7,new GameRGBAColor(0.18,0.42,0.76,0.80),[[0.2,0.2,1],[0.1,0,0.5],[0.3,0.3,2]]))"
+  },
+  {
+    "name": "机动射束炮-极意",
+    "desc": "残响专属武器。",
+    "type": "远程武器",
+    "rarity": "★★★★",
+    "damage": "基础伤害",
+    "get": "残响专属武器",
+    "element": "风",
+    "serverCode": "126: new ItemType(126,'机动射束炮-极意',4).cd([cdA(17),cdB(30)]).toequip([{mesh: 'mesh/机动射束炮_极意.vb',offset: [0,-0.3,0.4],orientation: Quat.rotateY(Math.PI * 0.5).rotateZ(-0.8),scale: [0.3,0.3,0.3],bodyPart: GameBodyPart.RIGHT_HAND,}],8,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},pickUpRaycasterConstructer('机动射束炮_极意'),takeOffRaycaster,raycaster(4,new GameRGBAColor(0.60,0.93,0.90,0.80),[[0.6,0.9,0.9],[0.2,0.7,0.7],[0.7,2,2]]))"
+  },
+  {
+    "name": "渊界撕裂者",
+    "desc": "残响渊之魔女战利品。",
+    "type": "近战武器",
+    "rarity": "★★★★",
+    "damage": "250 + 武器等级 × 48",
+    "get": "残响渊之魔女战利品",
+    "element": "暗",
+    "serverCode": "161: new ItemType(161,'渊界撕裂者',4).cd([cdA(10)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/渊界撕裂者.vb',offset: [0,-0.3,0.9],orientation: Quat.rotateZ(-0.3),scale: [0.5,0.5,0.5],}],0,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,{'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "护盾权杖",
+    "desc": "比赛活动奖品。",
+    "type": "魔法武器",
+    "rarity": "★★★",
+    "damage": "基础伤害",
+    "get": "比赛活动奖品",
+    "element": "光",
+    "serverCode": "159: new ItemType(159,'护盾权杖',3).cd([{cd(entity){return entity.shieldCD},getCD(entity,cd){return Math.min(Math.max(world.currentTick - entity.lastShield,0),cd);}}]).toequip([{bodyPart: GameBodyPart.LEFT_HAND,mesh: 'mesh/光暗法杖.vb',offset: [0,-0.1,0],scale: [0.3,0.3,0.3],orientation: Quat.rotateY(-Math.PI * 0.5).rotateZ(-Math.PI * 0.5),}],1,1520,defaultToString,armor,armor,{'action1'({entity,item}){}}).setConfig({shieldCD: 200})"
+  },
+  {
+    "name": "庇暗",
+    "desc": "渊界第十层三星。",
+    "type": "魔法武器",
+    "rarity": "★★★",
+    "damage": "基础伤害",
+    "get": "渊界第十层三星",
+    "element": "暗",
+    "serverCode": "160: new ItemType(160,'庇暗',3).cd([{cd(entity){return entity.shieldCD},getCD(entity,cd){return Math.min(Math.max(world.currentTick - entity.lastShield,0),cd);}}]).toequip([{bodyPart: GameBodyPart.LEFT_HAND,mesh: 'mesh/庇暗_手持.vb',}],1,1520,defaultToString,armor,armor,{'action1'({entity,item}){}}).setConfig({shieldCD: 312})"
+  }
+]
