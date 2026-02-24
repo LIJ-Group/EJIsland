@@ -1,4 +1,5 @@
 import { gameData, weaponData, armorData, enemyData } from './data.js';
+import { toast } from './toast.js';
 
 export function searchItems() {
     const searchInput = document.getElementById('itemSearch');
@@ -313,12 +314,12 @@ window.submitUpload = function() {
     const uploadDetails = document.getElementById('uploadDetails');
     
     if (!uploadName.value.trim()) {
-        alert('请输入词条名称');
+        toast.warning('请输入词条名称');
         return;
     }
     
     if (!uploadDesc.value.trim()) {
-        alert('请输入词条描述');
+        toast.warning('请输入词条描述');
         return;
     }
     
@@ -331,9 +332,8 @@ window.submitUpload = function() {
     };
     
     console.log('上传词条:', uploadData);
-    alert('词条上传成功！等待审核');
+    toast.success('词条上传成功！等待审核');
     
-    // 清空表单
     uploadName.value = '';
     uploadDesc.value = '';
     uploadDetails.value = '';

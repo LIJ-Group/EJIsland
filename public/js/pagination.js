@@ -70,6 +70,13 @@ export function renderPagination(section) {
         if (materialsContainer) {
             materialsContainer.insertAdjacentHTML('afterend', html);
         }
+    } else if (section === 'enemies') {
+        const bossH3 = container.querySelector('h3:nth-of-type(2)');
+        if (bossH3 && bossH3.textContent === 'Boss敌人') {
+            bossH3.insertAdjacentHTML('beforebegin', html);
+        } else {
+            container.insertAdjacentHTML('beforeend', html);
+        }
     } else {
         container.insertAdjacentHTML('beforeend', html);
     }
@@ -130,7 +137,7 @@ export function applyPagination(section) {
             grid.innerHTML = html;
         }
     } else if (section === 'enemies') {
-        const grid = document.querySelector('#enemies .enemy-grid');
+        const grid = document.querySelector('#normal-enemies');
         if (grid && enemyData) {
             let html = '';
             const normalEnemies = enemyData.filter(enemy => !enemy.boss && !enemy.elite && enemy.type === '普通');

@@ -2,7 +2,7 @@ import { getElementKey } from './utils.js';
 
 export const paginationConfig = {
     weapons: { pageSize: 8, currentPage: 1, totalItems: 38, items: null },
-    enemies: { pageSize: 4, currentPage: 1, totalItems: 4, items: null },
+    enemies: { pageSize: 8, currentPage: 1, totalItems: 4, items: null },
     armors: { pageSize: 6, currentPage: 1, totalItems: 10, items: null },
     consumables: { pageSize: 10, currentPage: 1, totalItems: 0, items: null },
     materials: { pageSize: 10, currentPage: 1, totalItems: 0, items: null }
@@ -16,6 +16,25 @@ export let areaData = [];
 export let elementData = [];
 export let elementReactionData = [];
 export let skillData = [];
+
+const dataCache = new Map();
+const CACHE_DURATION = 5 * 60 * 1000;
+
+async function fetchWithCache(url) {
+    const cached = dataCache.get(url);
+    if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
+        return cached.data;
+    }
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    dataCache.set(url, { data, timestamp: Date.now() });
+    return data;
+}
 
 export const gameData = {
     version: '1.0.0',
@@ -71,35 +90,15 @@ export const gameData = {
     },
     getSkillsByType: function(type) {
         return this.skills.filter(s => s.type === type);
-    },
-    exportJSON: function() {
-        return JSON.stringify({
-            version: this.version,
-            lastUpdate: this.lastUpdate,
-            weapons: this.weapons,
-            enemies: this.enemies,
-            armors: this.armors,
-            items: this.items,
-            areas: this.areas,
-            elements: this.elements,
-            elementReactions: this.elementReactions,
-            skills: this.skills
-        }, null, 2);
     }
 };
 
 export async function loadWeaponData() {
     try {
-        const response = await fetch("public/data/weapons.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setWeapons(data);
-            paginationConfig.weapons.totalItems = data.length;
-            return data;
-        } else {
-            console.error('加载武器数据失败:', response.status);
-            return [];
-        }
+        const data = await fetchWithCache("public/data/weapons.json");
+        gameData.setWeapons(data);
+        paginationConfig.weapons.totalItems = data.length;
+        return data;
     } catch (error) {
         console.error('加载武器数据失败:', error);
         return [];
@@ -108,16 +107,10 @@ export async function loadWeaponData() {
 
 export async function loadArmorData() {
     try {
-        const response = await fetch("public/data/armors.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setArmors(data);
-            paginationConfig.armors.totalItems = data.length;
-            return data;
-        } else {
-            console.error('加载护甲数据失败:', response.status);
-            return [];
-        }
+        const data = await fetchWithCache("public/data/armors.json");
+        gameData.setArmors(data);
+        paginationConfig.armors.totalItems = data.length;
+        return data;
     } catch (error) {
         console.error('加载护甲数据失败:', error);
         return [];
@@ -126,17 +119,11 @@ export async function loadArmorData() {
 
 export async function loadEnemyData() {
     try {
-        const response = await fetch("public/data/enemies.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setEnemies(data);
-            const normalEnemies = data.filter(enemy => !enemy.boss && !enemy.elite && enemy.type === '普通');
-            paginationConfig.enemies.totalItems = normalEnemies.length;
-            return data;
-        } else {
-            console.error('加载敌人数据失败:', response.status);
-            return [];
-        }
+        const data = await fetchWithCache("public/data/enemies.json");
+        gameData.setEnemies(data);
+        const normalEnemies = data.filter(enemy => !enemy.boss && !enemy.elite && enemy.type === '普通');
+        paginationConfig.enemies.totalItems = normalEnemies.length;
+        return data;
     } catch (error) {
         console.error('加载敌人数据失败:', error);
         return [];
@@ -145,17 +132,11 @@ export async function loadEnemyData() {
 
 export async function loadItemData() {
     try {
-        const response = await fetch("public/data/items.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setItems(data);
-            paginationConfig.consumables.totalItems = data.consumables?.length || 0;
-            paginationConfig.materials.totalItems = data.materials?.length || 0;
-            return data;
-        } else {
-            console.error('加载物品数据失败:', response.status);
-            return {};
-        }
+        const data = await fetchWithCache("public/data/items.json");
+        gameData.setItems(data);
+        paginationConfig.consumables.totalItems = data.consumables?.length || 0;
+        paginationConfig.materials.totalItems = data.materials?.length || 0;
+        return data;
     } catch (error) {
         console.error('加载物品数据失败:', error);
         return {};
@@ -164,15 +145,9 @@ export async function loadItemData() {
 
 export async function loadAreaData() {
     try {
-        const response = await fetch("public/data/areas.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setAreas(data);
-            return data;
-        } else {
-            console.error('加载区域数据失败:', response.status);
-            return [];
-        }
+        const data = await fetchWithCache("public/data/areas.json");
+        gameData.setAreas(data);
+        return data;
     } catch (error) {
         console.error('加载区域数据失败:', error);
         return [];
@@ -181,15 +156,9 @@ export async function loadAreaData() {
 
 export async function loadElementData() {
     try {
-        const response = await fetch("public/data/elements.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setElements(data);
-            return data;
-        } else {
-            console.error('加载元素数据失败:', response.status);
-            return [];
-        }
+        const data = await fetchWithCache("public/data/elements.json");
+        gameData.setElements(data);
+        return data;
     } catch (error) {
         console.error('加载元素数据失败:', error);
         return [];
@@ -198,15 +167,9 @@ export async function loadElementData() {
 
 export async function loadElementReactionData() {
     try {
-        const response = await fetch("public/data/elementReactions.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setElementReactions(data);
-            return data;
-        } else {
-            console.error('加载元素反应数据失败:', response.status);
-            return [];
-        }
+        const data = await fetchWithCache("public/data/elementReactions.json");
+        gameData.setElementReactions(data);
+        return data;
     } catch (error) {
         console.error('加载元素反应数据失败:', error);
         return [];
@@ -215,22 +178,20 @@ export async function loadElementReactionData() {
 
 export async function loadSkillData() {
     try {
-        const response = await fetch("public/data/skills.json");
-        if (response.ok) {
-            const data = await response.json();
-            gameData.setSkills(data);
-            return data;
-        } else {
-            console.error('加载技能数据失败:', response.status);
-            return [];
-        }
+        const data = await fetchWithCache("public/data/skills.json");
+        gameData.setSkills(data);
+        return data;
     } catch (error) {
         console.error('加载技能数据失败:', error);
         return [];
     }
 }
 
+let dataLoaded = false;
+
 export async function loadAllData() {
+    if (dataLoaded) return;
+    
     await Promise.all([
         loadWeaponData(),
         loadArmorData(),
@@ -241,4 +202,6 @@ export async function loadAllData() {
         loadElementReactionData(),
         loadSkillData()
     ]);
+    
+    dataLoaded = true;
 }

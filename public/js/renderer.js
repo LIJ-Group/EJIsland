@@ -1,5 +1,6 @@
 import { escapeHtml } from './utils.js';
 import { gameData, weaponData, armorData, enemyData, areaData, itemData, elementData, elementReactionData, skillData } from './data.js';
+import { toast } from './toast.js';
 
 export function createWeaponCard(item) {
     let html = `<div class="weapon-card"><h4>${item.name}</h4><p>${item.desc}</p><div class="weapon-stats">`;
@@ -30,7 +31,7 @@ export function createWeaponCard(item) {
 
 export function toggleCode(codeId, toggle) {
     if (!window.isAdmin) {
-        alert('权限不足，无法查看服务器代码');
+        toast.warning('权限不足，无法查看服务器代码');
         return;
     }
     const content = document.getElementById(codeId);
@@ -48,25 +49,6 @@ export function toggleCode(codeId, toggle) {
     if (icon) {
         icon.textContent = isActive ? '▲' : '▼';
     }
-}
-
-export function createEnemyCard(item) {
-    let html = `<div class="enemy-card"><h4>${item.name}</h4><p class="hp">生命值：${item.hp}</p>`;
-    if (item.boss || item.elite) {
-        html += `<div class="weapon-stats">`;
-        html += `<p><strong>出现区域：</strong>${item.area}</p>`;
-        html += `<p><strong>等级范围：</strong>随区域变化</p>`;
-        html += `<p><strong>元素属性：</strong>${item.element}</p>`;
-        html += `<p><strong>特殊技能：</strong></p><ul>`;
-        item.skills.forEach(s => html += `<li>${s}</li>`);
-        html += `</ul>`;
-        if (item.drop) html += `<p><strong>掉落物品：</strong>${item.drop}</p>`;
-        html += `</div>`;
-    } else {
-        html += `<p>${item.desc}</p>`;
-    }
-    html += `</div>`;
-    return html;
 }
 
 export function createArmorCard(item) {
@@ -120,7 +102,7 @@ export function renderBossEnemies() {
                 <p class="hp">生命值：${enemy.hp}</p>
                 <div class="weapon-stats">
                     <p><strong>出现区域：</strong>${enemy.area}</p>
-                    <p><strong>等级范围：</strong>${enemy.levelRange || '随区域变化'}</p>
+                    ${enemy.levelFormula ? `<p><strong>等级计算：</strong>${enemy.levelFormula}</p>` : '<p><strong>等级范围：</strong>随区域变化</p>'}
                     ${enemy.hpFormula ? `<p><strong>生命值公式：</strong>${enemy.hpFormula}</p>` : ''}
                     <p><strong>攻击方式：</strong>${enemy.attackMethods ? enemy.attackMethods.join('、') : enemy.skills.join('、')}</p>
                     <p><strong>特殊技能：</strong></p>
@@ -131,7 +113,10 @@ export function renderBossEnemies() {
                     <p><strong>元素属性：</strong>${enemy.element}</p>
                     ${enemy.refreshConditions ? `<p><strong>刷新条件：</strong></p><ul>${enemy.refreshConditions.map(condition => `<li>${condition}</li>`).join('')}</ul>` : ''}
                     ${enemy.refreshCooldown ? `<p><strong>刷新冷却：</strong>${enemy.refreshCooldown}</p>` : ''}
-                    <p><strong>掉落物品：</strong>${enemy.drop}</p>
+                    <p><strong>掉落物品：</strong></p>
+                    <ul>
+                        ${enemy.dropDetails ? enemy.dropDetails.map(drop => `<li>${drop}</li>`).join('') : `<li>${enemy.drop}</li>`}
+                    </ul>
                 </div>
             </div>
         `;
@@ -155,24 +140,46 @@ export function renderNormalEnemies() {
                     <p>${enemy.desc || ''}</p>
                     <div class="weapon-stats">
                         <p><strong>出现区域：</strong>${enemy.area}</p>
-                        ${enemy.levelRange ? `<p><strong>等级范围：</strong>${enemy.levelRange}</p>` : ''}
                         ${enemy.hpFormula ? `<p><strong>生命值公式：</strong>${enemy.hpFormula}</p>` : ''}
-                        ${enemy.attackMethods ? `<p><strong>攻击方式：</strong>${enemy.attackMethods.join('、')}</p>` : enemy.skills ? `<p><strong>攻击方式：</strong>${enemy.skills.join('、')}</p>` : ''}
+                        ${enemy.skills ? `<p><strong>攻击方式：</strong>${enemy.skills.join('、')}</p>` : ''}
                         ${enemy.element ? `<p><strong>元素属性：</strong>${enemy.element}</p>` : ''}
-                        ${enemy.drop ? `<p><strong>掉落物品：</strong>${enemy.drop}</p>` : ''}
+                        <p><strong>掉落物品：</strong></p>
+                        <ul>
+                            ${enemy.dropDetails ? enemy.dropDetails.map(drop => `<li>${drop}</li>`).join('') : enemy.drop ? `<li>${enemy.drop}</li>` : '<li>无</li>'}
+                        </ul>
                     </div>
                 </div>
             `).join('')}
         </div>
     `;
 
-    const bossSection = enemySection.querySelector('#boss-enemies');
-    if (bossSection) {
-        const h3Normal = enemySection.querySelector('h3:nth-of-type(1)');
-        if (h3Normal && h3Normal.textContent === '普通敌人') {
-            h3Normal.insertAdjacentHTML('afterend', normalEnemyGridHTML);
-        }
+    const existingGrid = enemySection.querySelector('#normal-enemies');
+    if (existingGrid) existingGrid.remove();
+
+    const h3Normal = enemySection.querySelector('h3:nth-of-type(1)');
+    if (h3Normal && h3Normal.textContent === '普通敌人') {
+        h3Normal.insertAdjacentHTML('afterend', normalEnemyGridHTML);
     }
+}
+
+export function createEnemyCard(enemy) {
+    return `
+        <div class="enemy-card">
+            <h4>${enemy.name}</h4>
+            <p class="hp">生命值：${enemy.hp}</p>
+            <p>${enemy.desc || ''}</p>
+            <div class="weapon-stats">
+                <p><strong>出现区域：</strong>${enemy.area}</p>
+                ${enemy.hpFormula ? `<p><strong>生命值公式：</strong>${enemy.hpFormula}</p>` : ''}
+                ${enemy.skills ? `<p><strong>攻击方式：</strong>${enemy.skills.join('、')}</p>` : ''}
+                ${enemy.element ? `<p><strong>元素属性：</strong>${enemy.element}</p>` : ''}
+                <p><strong>掉落物品：</strong></p>
+                <ul>
+                    ${enemy.dropDetails ? enemy.dropDetails.map(drop => `<li>${drop}</li>`).join('') : enemy.drop ? `<li>${enemy.drop}</li>` : '<li>无</li>'}
+                </ul>
+            </div>
+        </div>
+    `;
 }
 
 export function renderWeapons() {
@@ -212,18 +219,22 @@ export function renderArmors() {
 
     let html = '';
     armorData.forEach(armor => {
+        let defHtml = '';
+        if (armor.def) {
+            Object.entries(armor.def).forEach(([key, value]) => {
+                defHtml += `<p><strong>${key}抗性：</strong>${value}</p>`;
+            });
+        }
         html += `
             <div class="weapon-card">
-                <h4>${armor.name}</h4>
+                <h4>${armor.name} <span class="rarity">${armor.rarity || ''}</span></h4>
                 <p>${armor.desc || ''}</p>
                 <div class="weapon-stats">
                     <p><strong>类型：</strong>${armor.type}</p>
-                    ${armor.durability ? `<p><strong>耐久度：</strong>${armor.durability}</p>` : ''}
-                    ${armor.set ? `<p><strong>套装组成：</strong>${armor.set}</p>` : ''}
-                    ${armor.physicalDefense ? `<p><strong>物理防御：</strong>${armor.physicalDefense}</p>` : ''}
-                    ${armor.elementDefense ? `<p><strong>元素防御：</strong>${armor.elementDefense}</p>` : ''}
-                    ${armor.iceDefense ? `<p><strong>冰系防御：</strong>${armor.iceDefense}</p>` : ''}
-                    ${armor.otherElementDefense ? `<p><strong>其他元素防御：</strong>${armor.otherElementDefense}</p>` : ''}
+                    ${armor.durability ? `<p><strong>耐久度：</strong>${armor.durability}</p>` : '<p><strong>耐久度：</strong>无消耗</p>'}
+                    ${defHtml}
+                    ${armor.skill ? `<p><strong>技能：</strong>${armor.skill}</p>` : ''}
+                    ${armor.get ? `<p><strong>获取方式：</strong>${armor.get}</p>` : ''}
                 </div>
             </div>
         `;
@@ -671,6 +682,7 @@ export function renderGrowth() {
                     </tr>
                     <tr><td>白银长枪</td><td>80级</td><td>机械碎片</td><td>50 + 当前等级 × 25</td></tr>
                     <tr><td>机械弩</td><td>80级</td><td>机械碎片</td><td>50 + 当前等级 × 25</td></tr>
+                    <tr><td>苍穹之上的星辰三叉戟</td><td>90级</td><td>机械碎片</td><td>375 + 当前等级 × 150</td></tr>
                     <tr><td>虚空之枪</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
                     <tr><td>冰系法杖</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
                     <tr><td>岩刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
@@ -680,11 +692,19 @@ export function renderGrowth() {
                     <tr><td>草刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
                     <tr><td>雷刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
                     <tr><td>飓风之杖</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>渊界撕裂者</td><td>90级</td><td>机械碎片</td><td>375 + 当前等级 × 150</td></tr>
+                    <tr><td>净水之刃</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
+                    <tr><td>爆炎之杖</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
+                    <tr><td>剧毒螳螂刀</td><td>90级</td><td>曙光灵石</td><td>37 + 当前等级 × 15</td></tr>
+                    <tr><td>剧毒导弹发射器</td><td>90级</td><td>曙光灵石</td><td>37 + 当前等级 × 15</td></tr>
+                    <tr><td>放电螳螂刀</td><td>90级</td><td>曙光灵石</td><td>50 + 当前等级 × 20</td></tr>
+                    <tr><td>星杖</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
+                    <tr><td>闪电螳螂刀</td><td>90级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>骑士大剑</td><td colspan="3">暂未录入</td></tr>
+                    <tr><td>渊界撕裂者</td><td colspan="3">暂未录入</td></tr>
                 </table>
             </div>
             <p class="formula-note">
-                注意：部分武器标注为[不可升级]，无法进行升级操作
+                注意：部分武器标注为[不可升级]，无法进行升级操作。包括：铁斧、铁镰、寒冰拳套、熔火裂界
             </p>
         </div>
 
