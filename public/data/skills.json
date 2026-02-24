@@ -2,9 +2,10 @@
   {
     "key": "shieldOfNothingness",
     "name": "寂无之盾",
-    "description": "受到伤害时，根据伤害值生成护盾。护盾可以吸收伤害，持续3.1秒。",
+    "description": "受到伤害时，根据伤害值生成护盾。护盾可以吸收伤害，持续3.1秒。护盾值为受到伤害的一定百分比。",
     "type": "防御",
     "maxLevel": 10,
+    "costFormula": "500 + 等级 × 300",
     "levels": [
       { "level": 1, "value": "31%", "cost": 500 },
       { "level": 2, "value": "42%", "cost": 800 },
@@ -16,46 +17,51 @@
       { "level": 8, "value": "150%", "cost": 2600 },
       { "level": 9, "value": "180%", "cost": 2900 },
       { "level": 10, "value": "200%", "cost": 3200 }
-    ]
+    ],
+    "tips": ["护盾可以叠加", "护盾持续3.1秒", "高等级护盾可以完全抵消伤害"]
   },
   {
-    "key": "natureSpell",
+    "key": "naturalMagic",
     "name": "自然法术",
-    "description": "提升旅行者的攻击力，等级越高提升越大。",
+    "description": "提升所有攻击力，包括武器攻击和技能攻击。",
     "type": "攻击",
     "maxLevel": 11,
+    "costFormula": "510 + 等级 × 290",
     "levels": [
-      { "level": 1, "value": "+50%", "cost": 400 },
-      { "level": 2, "value": "+60%", "cost": 700 },
-      { "level": 3, "value": "+70%", "cost": 1000 },
-      { "level": 4, "value": "+80%", "cost": 1300 },
-      { "level": 5, "value": "+90%", "cost": 1600 },
-      { "level": 6, "value": "+100%", "cost": 1900 },
-      { "level": 7, "value": "+120%", "cost": 2200 },
-      { "level": 8, "value": "+130%", "cost": 2500 },
-      { "level": 9, "value": "+150%", "cost": 2800 },
-      { "level": 10, "value": "+180%", "cost": 3100 },
-      { "level": 11, "value": "+200%", "cost": 3400 }
-    ]
+      { "level": 1, "value": "50%", "cost": 400 },
+      { "level": 2, "value": "60%", "cost": 800 },
+      { "level": 3, "value": "70%", "cost": 1090 },
+      { "level": 4, "value": "80%", "cost": 1380 },
+      { "level": 5, "value": "90%", "cost": 1670 },
+      { "level": 6, "value": "100%", "cost": 1960 },
+      { "level": 7, "value": "120%", "cost": 2250 },
+      { "level": 8, "value": "130%", "cost": 2540 },
+      { "level": 9, "value": "150%", "cost": 2830 },
+      { "level": 10, "value": "180%", "cost": 3120 },
+      { "level": 11, "value": "200%", "cost": 3410 }
+    ],
+    "tips": ["提升所有攻击力", "与武器攻击叠加", "高等级效果显著"]
   },
   {
-    "key": "savageAssault",
+    "key": "savageStrike",
     "name": "野人进击",
-    "description": "提升旅行者的近战攻击力，等级越高提升效果越显著。",
+    "description": "提升近战攻击力，包括所有近战武器的攻击。",
     "type": "攻击",
     "maxLevel": 11,
+    "costFormula": "270 + 等级 × 185",
     "levels": [
-      { "level": 1, "value": "+50%", "cost": 200 },
-      { "level": 2, "value": "+60%", "cost": 370 },
-      { "level": 3, "value": "+70%", "cost": 540 },
-      { "level": 4, "value": "+80%", "cost": 710 },
-      { "level": 5, "value": "+90%", "cost": 880 },
-      { "level": 6, "value": "+100%", "cost": 1050 },
-      { "level": 7, "value": "+120%", "cost": 1220 },
-      { "level": 8, "value": "+130%", "cost": 1390 },
-      { "level": 9, "value": "+150%", "cost": 1560 },
-      { "level": 10, "value": "+180%", "cost": 1730 },
-      { "level": 11, "value": "+200%", "cost": 1900 }
-    ]
+      { "level": 1, "value": "50%", "cost": 200 },
+      { "level": 2, "value": "60%", "cost": 455 },
+      { "level": 3, "value": "70%", "cost": 640 },
+      { "level": 4, "value": "80%", "cost": 825 },
+      { "level": 5, "value": "90%", "cost": 1010 },
+      { "level": 6, "value": "100%", "cost": 1195 },
+      { "level": 7, "value": "120%", "cost": 1380 },
+      { "level": 8, "value": "130%", "cost": 1565 },
+      { "level": 9, "value": "150%", "cost": 1750 },
+      { "level": 10, "value": "180%", "cost": 1935 },
+      { "level": 11, "value": "200%", "cost": 2120 }
+    ],
+    "tips": ["仅提升近战攻击力", "与自然法术叠加", "适合近战玩家"]
   }
 ]

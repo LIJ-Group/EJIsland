@@ -1,0 +1,167 @@
+[
+  {
+    "id": 0,
+    "name": "第一章：夜明之地，踏上旅程",
+    "type": "主线任务",
+    "status": "已完成",
+    "steps": [
+      {
+        "index": 0,
+        "description": "前往道具店与店员对话",
+        "type": "对话"
+      },
+      {
+        "index": 1,
+        "description": "在道具店购买一些武器",
+        "type": "购买"
+      },
+      {
+        "index": 2,
+        "description": "在餐饮店购买一些食物",
+        "type": "购买"
+      },
+      {
+        "index": 3,
+        "description": "前往附近的雪山，并且启动雪山的传送锚点",
+        "type": "探索"
+      },
+      {
+        "index": 4,
+        "description": "击败3只冰灵",
+        "type": "战斗",
+        "target": "冰灵水晶",
+        "count": 3
+      },
+      {
+        "index": 5,
+        "description": "前往雪山洞中，并且启动寒冰之心的传送锚点",
+        "type": "探索"
+      },
+      {
+        "index": 6,
+        "description": "走上寒冰之心的透明台阶，并击败冰雪女王",
+        "type": "Boss战",
+        "target": "冰雪女王"
+      },
+      {
+        "index": 7,
+        "description": "与道具店边上坐在长椅上的老市民对话",
+        "type": "对话"
+      },
+      {
+        "index": 8,
+        "description": "前往埋骨峡谷",
+        "type": "探索"
+      },
+      {
+        "index": 9,
+        "description": "击败6只岩灵水晶或者巡逻机甲",
+        "type": "战斗",
+        "target": "岩灵水晶/巡逻机甲",
+        "count": 6
+      },
+      {
+        "index": 10,
+        "description": "击败魔力传导训练机甲或者魔力传导训练机甲-狂澜",
+        "type": "Boss战",
+        "target": "魔力传导训练机甲"
+      },
+      {
+        "index": 11,
+        "description": "继续前往埋骨峡谷",
+        "type": "探索"
+      },
+      {
+        "index": 12,
+        "description": "击败6只骷髅",
+        "type": "战斗",
+        "target": "骷髅",
+        "count": 6
+      },
+      {
+        "index": 13,
+        "description": "启动埋骨峡谷的传送点",
+        "type": "探索"
+      },
+      {
+        "index": 14,
+        "description": "击败剧毒蛛王",
+        "type": "Boss战",
+        "target": "剧毒蛛王"
+      },
+      {
+        "index": 15,
+        "description": "前往酒吧，与神秘人对话",
+        "type": "对话"
+      },
+      {
+        "index": 16,
+        "description": "前往鹰崖城",
+        "type": "探索"
+      },
+      {
+        "index": 17,
+        "description": "启动鹰崖城的传送点",
+        "type": "探索"
+      },
+      {
+        "index": 18,
+        "description": "击败鸣雷重机",
+        "type": "Boss战",
+        "target": "鸣雷重机"
+      },
+      {
+        "index": 19,
+        "description": "前往酒吧，与血光对话",
+        "type": "对话"
+      }
+    ],
+    "rewards": ["经验值", "技能点", "材料"],
+    "unlocks": ["第二章"]
+  },
+  {
+    "id": 1,
+    "name": "第二章：新的天地，新的开始",
+    "type": "主线任务",
+    "status": "开发中",
+    "steps": [
+      {
+        "index": 0,
+        "description": "未完成（就是现在没有这个任务的意思）",
+        "type": "待定"
+      }
+    ],
+    "rewards": ["待定"],
+    "unlocks": []
+  },
+  {
+    "id": 2,
+    "name": "勇者与巨龙",
+    "type": "支线任务",
+    "status": "开发中",
+    "steps": [
+      {
+        "index": 0,
+        "description": "向旁边餐馆老板打听情况",
+        "type": "对话"
+      }
+    ],
+    "rewards": ["待定"],
+    "unlocks": []
+  },
+  {
+    "id": 3,
+    "name": "等级突破任务·其一",
+    "type": "突破任务",
+    "status": "开发中",
+    "steps": [
+      {
+        "index": 0,
+        "description": "前往魔法师协会了解关于等级突破的事项",
+        "type": "对话"
+      }
+    ],
+    "rewards": ["等级上限提升"],
+    "unlocks": []
+  }
+]

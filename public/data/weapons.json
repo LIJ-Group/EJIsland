@@ -351,25 +351,5 @@
     "get": "残响渊之魔女战利品",
     "element": "暗",
     "serverCode": "161: new ItemType(161,'渊界撕裂者',4).cd([cdA(10)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/渊界撕裂者.vb',offset: [0,-0.3,0.9],orientation: Quat.rotateZ(-0.3),scale: [0.5,0.5,0.5],}],0,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,{'action0'({ entity, item }) {}})"
-  },
-  {
-    "name": "护盾权杖",
-    "desc": "比赛活动奖品。",
-    "type": "魔法武器",
-    "rarity": "★★★",
-    "damage": "基础伤害",
-    "get": "比赛活动奖品",
-    "element": "光",
-    "serverCode": "159: new ItemType(159,'护盾权杖',3).cd([{cd(entity){return entity.shieldCD},getCD(entity,cd){return Math.min(Math.max(world.currentTick - entity.lastShield,0),cd);}}]).toequip([{bodyPart: GameBodyPart.LEFT_HAND,mesh: 'mesh/光暗法杖.vb',offset: [0,-0.1,0],scale: [0.3,0.3,0.3],orientation: Quat.rotateY(-Math.PI * 0.5).rotateZ(-Math.PI * 0.5),}],1,1520,defaultToString,armor,armor,{'action1'({entity,item}){}}).setConfig({shieldCD: 200})"
-  },
-  {
-    "name": "庇暗",
-    "desc": "渊界第十层三星。",
-    "type": "魔法武器",
-    "rarity": "★★★",
-    "damage": "基础伤害",
-    "get": "渊界第十层三星",
-    "element": "暗",
-    "serverCode": "160: new ItemType(160,'庇暗',3).cd([{cd(entity){return entity.shieldCD},getCD(entity,cd){return Math.min(Math.max(world.currentTick - entity.lastShield,0),cd);}}]).toequip([{bodyPart: GameBodyPart.LEFT_HAND,mesh: 'mesh/庇暗_手持.vb',}],1,1520,defaultToString,armor,armor,{'action1'({entity,item}){}}).setConfig({shieldCD: 312})"
   }
 ]

@@ -1,5 +1,5 @@
 import { escapeHtml } from './utils.js';
-import { gameData, weaponData, armorData, enemyData, areaData, itemData, elementData, elementReactionData, skillData } from './data.js';
+import { gameData, weaponData, armorData, enemyData, areaData, itemData, elementData, elementReactionData, skillData, questData } from './data.js';
 import { toast } from './toast.js';
 
 export function createWeaponCard(item) {
@@ -76,11 +76,29 @@ export function renderAreas() {
 
     let html = '';
     areaData.forEach(area => {
+        let featuresHtml = '';
+        if (area.features) {
+            featuresHtml = area.features.map(f => `<span class="feature-tag">${f}</span>`).join('');
+        }
+        let hazardsHtml = '';
+        if (area.hazards) {
+            hazardsHtml = `<p><strong>危险：</strong>${area.hazards.join('、')}</p>`;
+        }
+        let tipsHtml = '';
+        if (area.tips) {
+            tipsHtml = `<p><strong>提示：</strong>${area.tips.join('；')}</p>`;
+        }
         html += `
             <div class="area-card">
                 <h4>${area.name}</h4>
-                <p class="level">${area.type}</p>
+                <p class="level">${area.type} | ${area.level}</p>
                 <p>${area.desc}</p>
+                ${area.music ? `<p><strong>背景音乐：</strong>${area.music}</p>` : ''}
+                ${featuresHtml ? `<div class="features">${featuresHtml}</div>` : ''}
+                ${hazardsHtml}
+                ${tipsHtml}
+                ${area.boss ? `<p><strong>Boss：</strong>${area.boss}</p>` : ''}
+                ${area.drops ? `<p><strong>主要掉落：</strong>${area.drops.join('、')}</p>` : ''}
             </div>
         `;
     });
@@ -194,14 +212,10 @@ export function renderWeapons() {
                 <p>${weapon.desc || ''}</p>
                 <div class="weapon-stats">
                     <p><strong>类型：</strong>${weapon.type}</p>
-                    ${weapon.source ? `<p><strong>获取途径：</strong>${weapon.source}</p>` : ''}
-                    <p><strong>稀有度：</strong>${'★'.repeat(weapon.rarity || 1)}</p>
-                    ${weapon.attackMethod ? `<p><strong>攻击方式：</strong>${weapon.attackMethod}</p>` : ''}
-                    ${weapon.damageFormula ? `<p><strong>伤害公式：</strong>${weapon.damageFormula}</p>` : ''}
-                    ${weapon.damageFormulaLand ? `<p><strong>伤害公式（陆地）：</strong>${weapon.damageFormulaLand}</p>` : ''}
-                    ${weapon.damageFormulaWater ? `<p><strong>伤害公式（水下）：</strong>${weapon.damageFormulaWater}</p>` : ''}
+                    ${weapon.get ? `<p><strong>获取途径：</strong>${weapon.get}</p>` : ''}
+                    <p><strong>稀有度：</strong>${weapon.rarity || '★'}</p>
+                    ${weapon.damage ? `<p><strong>伤害公式：</strong>${weapon.damage}</p>` : ''}
                     ${weapon.element ? `<p><strong>元素类型：</strong>${weapon.element}</p>` : ''}
-                    ${weapon.specialEffect ? `<p><strong>特殊效果：</strong>${weapon.specialEffect}</p>` : ''}
                 </div>
             </div>
         `;
@@ -250,21 +264,24 @@ export function renderItems() {
     const consumables = itemData.consumables || [];
     const materials = itemData.materials || [];
 
-    // 渲染消耗品
     if (consumables.length > 0) {
         const consumablesHTML = `
             <h3>消耗品</h3>
             <div class="item-category">
                 <table class="item-table consumables-table">
                     <thead>
-                        <tr><th>名称</th><th>效果/用途</th><th>类别</th></tr>
+                        <tr><th>名称</th><th>效果</th><th>类别</th><th>稀有度</th><th>价格</th><th>堆叠</th><th>冷却</th></tr>
                     </thead>
                     <tbody>
                         ${consumables.map(item => `
                             <tr>
                                 <td>${item.name}</td>
-                                <td>${item.effect}</td>
-                                <td>${item.category}</td>
+                                <td>${item.effect || ''}</td>
+                                <td>${item.category || ''}</td>
+                                <td>${item.rarity || ''}</td>
+                                <td>${item.price || ''}</td>
+                                <td>${item.stack || ''}</td>
+                                <td>${item.cooldown || ''}</td>
                             </tr>
                         `).join('')}
                     </tbody>
@@ -274,21 +291,22 @@ export function renderItems() {
         itemsSection.insertAdjacentHTML('beforeend', consumablesHTML);
     }
 
-    // 渲染材料
     if (materials.length > 0) {
         const materialsHTML = `
             <h3>材料</h3>
             <div class="item-category">
                 <table class="item-table materials-table">
                     <thead>
-                        <tr><th>名称</th><th>用途</th><th>类别</th></tr>
+                        <tr><th>名称</th><th>用途</th><th>类别</th><th>稀有度</th><th>来源</th></tr>
                     </thead>
                     <tbody>
                         ${materials.map(item => `
                             <tr>
-                                <td>${item.name}</td>
-                                <td>${item.usage}</td>
-                                <td>${item.category}</td>
+                                <td>${item.name || ''}</td>
+                                <td>${item.usage || ''}</td>
+                                <td>${item.category || ''}</td>
+                                <td>${item.rarity || ''}</td>
+                                <td>${item.source || ''}</td>
                             </tr>
                         `).join('')}
                     </tbody>
@@ -467,12 +485,201 @@ export function renderDamage() {
                 <li><strong>技能触发</strong>：触发受击者的相关技能</li>
                 <li><strong>暴击计算</strong>：计算暴击率和暴击伤害</li>
                 <li><strong>造成伤害</strong>：调用 hurt 函数实际造成伤害</li>
-                <li><strong>装备损耗</strong>：装备会受到损耗</li>
+                <li><strong>技能触发</strong>：触发受击者的相关技能</li>
             </ol>
         </div>
     `;
-
     damageContent.innerHTML = damageHTML;
+}
+
+export function renderQuests() {
+    const questsContent = document.getElementById('quests-content');
+    if (!questsContent) return;
+
+    let html = '';
+    questData.forEach(quest => {
+        html += `
+            <div class="quest-card">
+                <h4>${quest.name}</h4>
+                <p class="quest-type">${quest.type} | ${quest.status}</p>
+                <div class="quest-steps">
+                    <h5>任务步骤：</h5>
+                    <ol>
+                        ${quest.steps.map(step => `
+                            <li class="step-${step.type.toLowerCase()}">
+                                <span class="step-type">[${step.type}]</span>
+                                ${step.description}
+                                ${step.target ? `<span class="step-target">目标：${step.target}${step.count ? ` x${step.count}` : ''}</span>` : ''}
+                            </li>
+                        `).join('')}
+                    </ol>
+                </div>
+                ${quest.rewards ? `<p><strong>奖励：</strong>${quest.rewards.join('、')}</p>` : ''}
+                ${quest.unlocks && quest.unlocks.length > 0 ? `<p><strong>解锁：</strong>${quest.unlocks.join('、')}</p>` : ''}
+            </div>
+        `;
+    });
+
+    questsContent.innerHTML = html;
+}
+
+export function renderSkills() {
+    const skillsContent = document.getElementById('skills-content');
+    if (!skillsContent) return;
+
+    let html = '';
+    skillData.forEach(skill => {
+        html += `
+            <div class="skill-card">
+                <h4>${skill.name}</h4>
+                <p class="skill-type">${skill.type} | 最高等级：${skill.maxLevel}</p>
+                <p>${skill.description}</p>
+                ${skill.costFormula ? `<p><strong>升级费用公式：</strong>${skill.costFormula}</p>` : ''}
+                <div class="skill-levels">
+                    <h5>等级详情：</h5>
+                    <table class="skill-table">
+                        <thead>
+                            <tr><th>等级</th><th>效果</th><th>费用</th></tr>
+                        </thead>
+                        <tbody>
+                            ${skill.levels.map(level => `
+                                <tr>
+                                    <td>Lv.${level.level}</td>
+                                    <td>${level.value}</td>
+                                    <td>${level.cost}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                ${skill.tips ? `<p><strong>提示：</strong>${skill.tips.join('；')}</p>` : ''}
+            </div>
+        `;
+    });
+
+    skillsContent.innerHTML = html;
+}
+
+export function renderTips() {
+    const tipsContent = document.getElementById('tips-content');
+    if (!tipsContent) return;
+
+    const tipsHTML = `
+        <div class="info-box">
+            <h3>新手入门</h3>
+            <ul>
+                <li><strong>第一步：</strong>在夜明镇与NPC对话，了解游戏基本操作</li>
+                <li><strong>购买装备：</strong>在道具店购买初始武器和护甲</li>
+                <li><strong>准备食物：</strong>在餐饮店购买回复道具</li>
+                <li><strong>解锁传送：</strong>探索各个区域时记得激活传送锚点</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>战斗技巧</h3>
+            <ul>
+                <li><strong>元素反应：</strong>利用元素反应可以造成更高伤害</li>
+                <li><strong>躲避攻击：</strong>注意敌人的攻击前摇，及时躲避</li>
+                <li><strong>合理使用食物：</strong>战斗前使用增益食物可以大幅提升战斗力</li>
+                <li><strong>护盾技能：</strong>学习寂无之盾可以在受到伤害时生成护盾</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>生存指南</h3>
+            <ul>
+                <li><strong>寒冷区域：</strong>在至北雪山注意寒冷值，及时使用保暖道具</li>
+                <li><strong>Boss战：</strong>Boss战前准备好足够的回复道具和增益食物</li>
+                <li><strong>装备耐久：</strong>注意装备耐久度，及时修复或更换</li>
+                <li><strong>等级突破：</strong>达到等级上限后需要完成突破任务才能继续升级</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>资源获取</h3>
+            <ul>
+                <li><strong>曙光灵石：</strong>主要货币，通过击败敌人和完成任务获得</li>
+                <li><strong>技能点：</strong>用于升级技能，击败敌人和开宝箱获得</li>
+                <li><strong>材料：</strong>击败对应元素的敌人获得相应材料</li>
+                <li><strong>残响之地：</strong>高风险高回报的区域，可以获得稀有装备</li>
+            </ul>
+        </div>
+        <div class="warning-box">
+            <h3>注意事项</h3>
+            <ul>
+                <li>死亡会损失部分物品，请谨慎冒险</li>
+                <li>残响之地是PVP区域，小心其他玩家</li>
+                <li>部分武器有特殊攻击方式，按住蹲下键可以释放技能</li>
+                <li>水下战斗与陆地战斗机制不同，部分武器在水下有特殊效果</li>
+            </ul>
+        </div>
+    `;
+    tipsContent.innerHTML = tipsHTML;
+}
+
+export function renderGrowth() {
+    const growthContent = document.getElementById('growth-content');
+    if (!growthContent) return;
+
+    const growthHTML = `
+        <div class="info-box">
+            <h3>等级系统</h3>
+            <p>通过击败敌人和完成任务获得经验值，提升等级可以增加基础属性。</p>
+            <ul>
+                <li><strong>初始等级上限：</strong>75级</li>
+                <li><strong>等级突破：</strong>达到等级上限后需要完成突破任务才能继续升级</li>
+                <li><strong>武器等级限制：</strong>可使用武器等级上限 = min(玩家等级上限 + 5, 90)</li>
+            </ul>
+            <p><strong>武器等级分段：</strong></p>
+            <ul>
+                <li><strong>玩家等级 + 10：</strong>玩家等级 < 30 级</li>
+                <li><strong>玩家等级 + 5：</strong>玩家等级 >= 30 级</li>
+                <li><strong>最高等级：</strong>武器等级上限</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>技能系统</h3>
+            <p>使用技能点可以学习和升级技能，提升战斗能力。</p>
+            <ul>
+                <li><strong>寂无之盾：</strong>防御技能，受到伤害时生成护盾</li>
+                <li><strong>自然法术：</strong>攻击技能，提升所有攻击力</li>
+                <li><strong>野人进击：</strong>攻击技能，提升近战攻击力</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>武器升级</h3>
+            <p>部分武器可以通过消耗材料进行升级，提升武器伤害和效果。</p>
+            <table class="growth-table">
+                <thead>
+                    <tr><th>武器名称</th><th>解锁等级</th><th>升级材料</th><th>升级费用公式</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>白银长枪</td><td>1级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>机械弩</td><td>1级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>虚空之枪</td><td>30级</td><td>曙光灵石</td><td>300 + 当前等级 × 40</td></tr>
+                    <tr><td>冰系法杖</td><td>20级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>岩刀</td><td>20级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>岩枪</td><td>20级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>炎刀</td><td>20级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>狂涛之弓</td><td>30级</td><td>曙光灵石</td><td>300 + 当前等级 × 40</td></tr>
+                    <tr><td>飓风之杖</td><td>30级</td><td>曙光灵石</td><td>300 + 当前等级 × 40</td></tr>
+                    <tr><td>净水之刃</td><td>30级</td><td>曙光灵石</td><td>300 + 当前等级 × 40</td></tr>
+                    <tr><td>爆炎之杖</td><td>30级</td><td>曙光灵石</td><td>300 + 当前等级 × 40</td></tr>
+                    <tr><td>苍穹之上的星辰三叉戟</td><td>90级</td><td>机械碎片</td><td>375 + 当前等级 × 150</td></tr>
+                    <tr><td>剧毒螳螂刀</td><td>60级</td><td>曙光灵石</td><td>300 + 当前等级 × 40</td></tr>
+                    <tr><td>闪电螳螂刀</td><td>90级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
+                    <tr><td>骑士大剑</td><td colspan="3">暂未录入</td></tr>
+                    <tr><td>渊界撕裂者</td><td colspan="3">暂未录入</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="info-box">
+            <h3>装备耐久</h3>
+            <p>武器和护甲都有耐久度，使用和战斗会消耗耐久。</p>
+            <ul>
+                <li><strong>修复材料：</strong>使用铜矿（100耐久）或铁矿（500耐久）修复装备</li>
+                <li><strong>耐久归零：</strong>装备耐久归零后无法使用，但不会消失</li>
+            </ul>
+        </div>
+    `;
+    growthContent.innerHTML = growthHTML;
 }
 
 export function renderElement() {
@@ -552,287 +759,6 @@ export function renderElement() {
     `;
 
     elementContent.innerHTML = elementGridHTML;
-}
-
-export function renderSkills() {
-    const skillsContent = document.getElementById('skills-content');
-    if (!skillsContent) return;
-
-    let skillsHTML = '';
-
-    if (skillData.length > 0) {
-        skillsHTML = `
-            <div class="skill-grid">
-                ${skillData.map(skill => `
-                    <div class="weapon-card">
-                        <h4>${skill.name || '未知技能'}</h4>
-                        <p>${skill.description || '无描述'}</p>
-                        <div class="weapon-stats">
-                            <p><strong>类型：</strong>${skill.type || '未知类型'}</p>
-                            ${skill.cooldown ? `<p><strong>冷却时间：</strong>${skill.cooldown}</p>` : ''}
-                            ${skill.cost ? `<p><strong>消耗：</strong>${skill.cost}</p>` : ''}
-                            ${skill.damage ? `<p><strong>伤害：</strong>${skill.damage}</p>` : ''}
-                        </div>
-                        ${skill.levels && skill.levels.length > 0 ? `
-                            <div class="skill-levels">
-                                <h5>等级表</h5>
-                                <table class="level-table">
-                                    <thead>
-                                        <tr><th>等级</th><th>效果</th><th>消耗</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        ${skill.levels.map(level => `
-                                            <tr>
-                                                <td>${level.level}</td>
-                                                <td>${level.value || 'N/A'}</td>
-                                                <td>${level.cost || 'N/A'}</td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        ` : ''}
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    } else {
-        skillsHTML = `
-            <div class="info-box">
-                <h3>技能列表</h3>
-                <p>暂无技能数据</p>
-            </div>
-        `;
-    }
-
-    skillsContent.innerHTML = skillsHTML;
-}
-
-export function renderGrowth() {
-    const growthContent = document.getElementById('growth-content');
-    if (!growthContent) return;
-
-    const growthHTML = `
-        <h3>升级系统</h3>
-        <div class="info-box">
-            <h3>升级所需经验值</h3>
-            <div class="formula-box">
-                <div class="formula-title">升级经验计算公式</div>
-                <div class="formula-content">
-                    升级到下一等级所需经验值 = 基础值 × 成长系数^当前等级
-                </div>
-                <div class="formula-note">
-                    基础值为500经验值，成长系数为1.2
-                </div>
-            </div>
-        </div>
-
-        <div class="table-wrapper">
-            <table class="item-table">
-                <tr>
-                    <th>等级</th>
-                    <th>升级所需经验</th>
-                    <th>累计经验</th>
-                </tr>
-                <tr><td>1</td><td>600</td><td>0</td></tr>
-                <tr><td>2</td><td>720</td><td>600</td></tr>
-                <tr><td>3</td><td>864</td><td>1,320</td></tr>
-                <tr><td>4</td><td>1,037</td><td>2,184</td></tr>
-                <tr><td>5</td><td>1,244</td><td>3,221</td></tr>
-                <tr><td>6</td><td>1,493</td><td>4,465</td></tr>
-                <tr><td>7</td><td>1,792</td><td>5,958</td></tr>
-                <tr><td>8</td><td>2,150</td><td>7,750</td></tr>
-                <tr><td>9</td><td>2,580</td><td>9,900</td></tr>
-                <tr><td>10</td><td>3,096</td><td>12,480</td></tr>
-                <tr><td>11</td><td>3,715</td><td>15,576</td></tr>
-                <tr><td>12</td><td>4,458</td><td>19,291</td></tr>
-                <tr><td>13</td><td>5,350</td><td>23,749</td></tr>
-                <tr><td>14</td><td>6,420</td><td>29,099</td></tr>
-                <tr><td>15</td><td>7,704</td><td>35,519</td></tr>
-                <tr><td>16</td><td>9,245</td><td>43,223</td></tr>
-                <tr><td>17</td><td>11,094</td><td>52,468</td></tr>
-                <tr><td>18</td><td>13,313</td><td>63,562</td></tr>
-                <tr><td>19</td><td>15,976</td><td>76,875</td></tr>
-                <tr><td>20</td><td>19,171</td><td>92,851</td></tr>
-            </table>
-        </div>
-
-        <h3>武器等级限制</h3>
-        <div class="formula-box">
-            <div class="formula-title">可使用武器等级计算公式</div>
-            <div class="formula-content">
-                武器最大可使用等级 = 玩家等级 + 10
-            </div>
-            <div class="formula-note">
-                例如：玩家等级为5级时，可使用最高15级的武器
-            </div>
-        </div>
-
-        <h3>武器升级材料</h3>
-        <div class="info-box">
-            <h3>升级所需材料</h3>
-            <p>武器升级需要消耗货币，不同武器的升级消耗不同。</p>
-            <div class="table-wrapper">
-                <table class="item-table">
-                    <tr>
-                        <th>武器名称</th>
-                        <th>最高等级</th>
-                        <th>所需货币</th>
-                        <th>升级消耗公式</th>
-                    </tr>
-                    <tr><td>白银长枪</td><td>80级</td><td>机械碎片</td><td>50 + 当前等级 × 25</td></tr>
-                    <tr><td>机械弩</td><td>80级</td><td>机械碎片</td><td>50 + 当前等级 × 25</td></tr>
-                    <tr><td>苍穹之上的星辰三叉戟</td><td>90级</td><td>机械碎片</td><td>375 + 当前等级 × 150</td></tr>
-                    <tr><td>虚空之枪</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>冰系法杖</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
-                    <tr><td>岩刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
-                    <tr><td>岩枪</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
-                    <tr><td>炎刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
-                    <tr><td>狂涛之弓</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>草刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
-                    <tr><td>雷刀</td><td>90级</td><td>曙光灵石</td><td>9 + 当前等级 × 5</td></tr>
-                    <tr><td>飓风之杖</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>净水之刃</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>爆炎之杖</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>剧毒螳螂刀</td><td>90级</td><td>曙光灵石</td><td>37 + 当前等级 × 15</td></tr>
-                    <tr><td>剧毒导弹发射器</td><td>90级</td><td>曙光灵石</td><td>37 + 当前等级 × 15</td></tr>
-                    <tr><td>放电螳螂刀</td><td>90级</td><td>曙光灵石</td><td>50 + 当前等级 × 20</td></tr>
-                    <tr><td>星杖</td><td>90级</td><td>曙光灵石</td><td>25 + 当前等级 × 10</td></tr>
-                    <tr><td>闪电螳螂刀</td><td>90级</td><td>曙光灵石</td><td>200 + 当前等级 × 25</td></tr>
-                    <tr><td>骑士大剑</td><td colspan="3">暂未录入</td></tr>
-                    <tr><td>渊界撕裂者</td><td colspan="3">暂未录入</td></tr>
-                </table>
-            </div>
-            <p class="formula-note">
-                注意：部分武器标注为[不可升级]，无法进行升级操作。包括：铁斧、铁镰、寒冰拳套、熔火裂界
-            </p>
-        </div>
-
-        <div class="info-box">
-            <h3>其他成长相关内容</h3>
-            <ul>
-                <li><strong>属性成长：</strong>每升一级，基础攻击力、生命值、防御力都会有一定提升</li>
-                <li><strong>技能解锁：</strong>达到特定等级后可学习新的技能</li>
-                <li><strong>区域解锁：</strong>达到特定等级后可进入更高级的区域</li>
-                <li><strong>经验获取：</strong>击败敌人获得经验值，敌人等级越高，获得的经验值越多</li>
-            </ul>
-        </div>
-
-        <h3>玩家突破材料</h3>
-        <div class="info-box">
-            <h3>突破所需材料</h3>
-            <p>玩家在特定等级需要进行突破才能继续升级，突破需要消耗特定材料。</p>
-            <div class="table-wrapper">
-                <table class="item-table">
-                    <tr>
-                        <th>突破等级</th>
-                        <th>所需材料</th>
-                    </tr>
-                    <tr><td>5级突破</td><td>破碎冰晶 × 10、泥潭水晶 × 10</td></tr>
-                    <tr><td>10级突破</td><td>破碎冰晶 × 30、泥潭水晶 × 30、冰皇之冕 × 3、机械之心 × 3</td></tr>
-                    <tr><td>15级突破</td><td>破碎冰晶 × 64、泥潭水晶 × 64、冰皇之冕 × 10、机械之心 × 10</td></tr>
-                    <tr><td>20级突破</td><td>严寒冰晶 × 20、坚石之核 × 20、冰皇之冕 × 15、机械之心 × 15、剧毒之心 × 15</td></tr>
-                    <tr><td>25级突破</td><td>严寒冰晶 × 64、坚石之核 × 64、灵魂之骨 × 64、冰皇之冕 × 15、机械之心 × 15、剧毒之心 × 20</td></tr>
-                    <tr><td>30级突破</td><td>冰冷核心 × 20、磐岩之心 × 20、灵魂之骨 × 20、雪怪水晶 × 100、冰皇之冕 × 20、机械之心 × 20、剧毒之心 × 25</td></tr>
-                    <tr><td>35级突破</td><td>鸣雷能量存储核心 × 20、冰冷核心 × 20、磐岩之心 × 20、灵魂之骨 × 20、雪怪水晶 × 20、冰皇之冕 × 20、剧毒之心 × 20</td></tr>
-                    <tr><td>40级突破</td><td>鸣雷能量存储核心 × 25、冰冷核心 × 20、磐岩之心 × 20、灵魂之骨 × 20、雪怪水晶 × 35、冰皇之冕 × 35、剧毒之心 × 35</td></tr>
-                    <tr><td>45级突破</td><td>鸣雷能量存储核心 × 32、冰冷核心 × 25、磐岩之心 × 25、灵魂之骨 × 25、雪怪水晶 × 20、冰皇之冕 × 20、剧毒之心 × 20、赤焰之心 × 20</td></tr>
-                    <tr><td>50级突破</td><td>鸣雷能量存储核心 × 32、冰冷核心 × 32、磐岩之心 × 32、灵魂之骨 × 32、雪怪水晶 × 25、冰皇之冕 × 25、剧毒之心 × 25、赤焰之心 × 25</td></tr>
-                    <tr><td>55级突破</td><td>鸣雷能量存储核心 × 20、剧毒之心 × 30、赤焰之心 × 30、净水的源初 × 30、爆炎之心 × 30</td></tr>
-                    <tr><td>60级突破</td><td>鸣雷能量存储核心 × 64、剧毒之心 × 64、赤焰之心 × 64、净水的源初 × 30、爆炎之心 × 30</td></tr>
-                    <tr><td>65级突破</td><td>净水的源初 × 45、爆炎之心 × 45、赤焰之心 × 40、渊界之域的记忆 × 1</td></tr>
-                    <tr><td>70级突破</td><td>净水的甘露 × 64、净水的源初 × 45、灼火之心 × 64、爆炎之心 × 45、赤焰之心 × 45、渊界之域的记忆 × 3</td></tr>
-                </table>
-            </div>
-            <p class="formula-note">
-                注意：突破后才能继续升级，突破会消耗材料但不提升等级
-            </p>
-        </div>
-    `;
-
-    growthContent.innerHTML = growthHTML;
-}
-
-export function renderQuests() {
-    const questsContent = document.getElementById('quests-content');
-    if (!questsContent) return;
-
-    const questsHTML = `
-        <h3>第一章：夜明之地，踏上旅程</h3>
-        <ol class="quest-list">
-            <li>前往道具店与店员对话</li>
-            <li>在道具店购买一些武器</li>
-            <li>在餐饮店购买一些食物</li>
-            <li>前往附近的雪山，并且启动雪山的传送锚点</li>
-            <li>击败3只冰灵</li>
-            <li>前往雪山洞中，并且启动寒冰之心的传送锚点</li>
-            <li>走上寒冰之心的透明台阶，并击败冰雪女王</li>
-            <li>与道具店边上坐在长椅上的老市民对话</li>
-            <li>前往埋骨峡谷</li>
-            <li>击败6只岩灵水晶或者巡逻机甲</li>
-            <li>击败魔力传导训练机甲或者魔力传导训练机甲-狂澜</li>
-            <li>继续前往埋骨峡谷</li>
-            <li>击败6只骷髅</li>
-            <li>启动埋骨峡谷的传送点</li>
-            <li>击败剧毒蛛王</li>
-            <li>前往酒吧，与神秘人对话</li>
-            <li>前往鹰崖城</li>
-            <li>启动鹰崖城的传送点</li>
-            <li>击败鸣雷重机</li>
-            <li>前往酒吧，与血光对话</li>
-        </ol>
-
-        <h3>第二章：渊界之域，深入未知</h3>
-        <ol class="quest-list">
-            <li>在酒吧与血光对话，了解渊界之域的位置</li>
-            <li>前往渊界之域入口，调查神秘的能量波动</li>
-            <li>击败渊界守卫，打开渊界之域的通道</li>
-            <li>进入渊界之域，启动传送锚点</li>
-            <li>探索渊界之域，了解这片神秘区域的历史</li>
-            <li>击败10只渊界怪物，收集渊界碎片</li>
-            <li>找到渊界祭坛，激活古老的符文</li>
-            <li>触发渊之魔女的出现</li>
-            <li>击败渊之魔女的第一阶段</li>
-            <li>见证渊之魔女进入第二阶段，感受更强的力量</li>
-            <li>在30%血量时应对渊之魔女的兔子跳模式</li>
-            <li>成功击败渊之魔女</li>
-            <li>收集渊界之域的记忆，了解真相</li>
-            <li>返回酒吧，向血光汇报任务完成</li>
-            <li>获得渊界撕裂者作为奖励</li>
-            <li>准备迎接更大的挑战</li>
-        </ol>
-    `;
-
-    questsContent.innerHTML = questsHTML;
-}
-
-export function renderTips() {
-    const tipsContent = document.getElementById('tips-content');
-    if (!tipsContent) return;
-
-    const tipsHTML = `
-        <div class="info-box">
-            <h3>新手建议</h3>
-            <ul>
-                <li>优先完成主线任务，解锁更多功能</li>
-                <li>注意收集资源，用于装备升级</li>
-                <li>合理使用元素反应，提升战斗效率</li>
-                <li>解锁传送锚点，方便快速移动</li>
-                <li>关注角色状态，及时使用恢复物品</li>
-            </ul>
-        </div>
-        <div class="info-box">
-            <h3>战斗技巧</h3>
-            <ul>
-                <li>观察敌人弱点，使用克制元素</li>
-                <li>合理利用技能冷却时间</li>
-                <li>保持移动，躲避敌人攻击</li>
-                <li>使用环境物品，创造有利条件</li>
-            </ul>
-        </div>
-    `;
-
-    tipsContent.innerHTML = tipsHTML;
 }
 
 export function renderUpload() {

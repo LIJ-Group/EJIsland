@@ -3,7 +3,7 @@ import { getElementKey } from './utils.js';
 export const paginationConfig = {
     weapons: { pageSize: 8, currentPage: 1, totalItems: 38, items: null },
     enemies: { pageSize: 8, currentPage: 1, totalItems: 4, items: null },
-    armors: { pageSize: 6, currentPage: 1, totalItems: 10, items: null },
+    armors: { pageSize: 6, currentPage: 1, totalItems: 12, items: null },
     consumables: { pageSize: 10, currentPage: 1, totalItems: 0, items: null },
     materials: { pageSize: 10, currentPage: 1, totalItems: 0, items: null }
 };
@@ -16,6 +16,7 @@ export let areaData = [];
 export let elementData = [];
 export let elementReactionData = [];
 export let skillData = [];
+export let questData = [];
 
 const dataCache = new Map();
 const CACHE_DURATION = 5 * 60 * 1000;
@@ -47,6 +48,7 @@ export const gameData = {
     get elements() { return elementData; },
     get elementReactions() { return elementReactionData; },
     get skills() { return skillData; },
+    get quests() { return questData; },
     setWeapons: function(data) { weaponData = data; },
     setEnemies: function(data) { enemyData = data; },
     setArmors: function(data) { armorData = data; },
@@ -55,6 +57,7 @@ export const gameData = {
     setElements: function(data) { elementData = data; },
     setElementReactions: function(data) { elementReactionData = data; },
     setSkills: function(data) { skillData = data; },
+    setQuests: function(data) { questData = data; },
     getWeaponsByType: function(type) {
         return this.weapons.filter(w => w.type === type);
     },
@@ -187,6 +190,17 @@ export async function loadSkillData() {
     }
 }
 
+export async function loadQuestData() {
+    try {
+        const data = await fetchWithCache("public/data/quests.json");
+        gameData.setQuests(data);
+        return data;
+    } catch (error) {
+        console.error('加载任务数据失败:', error);
+        return [];
+    }
+}
+
 let dataLoaded = false;
 
 export async function loadAllData() {
@@ -200,7 +214,8 @@ export async function loadAllData() {
         loadAreaData(),
         loadElementData(),
         loadElementReactionData(),
-        loadSkillData()
+        loadSkillData(),
+        loadQuestData()
     ]);
     
     dataLoaded = true;

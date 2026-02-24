@@ -3,279 +3,653 @@
     {
       "name": "小型生命药水",
       "effect": "回复1000血量",
-      "category": "恢复"
+      "category": "恢复",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "100曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "中型生命药水",
       "effect": "回复5000血量",
-      "category": "恢复"
+      "category": "恢复",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "500曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "大型生命药水",
       "effect": "回复20000血量",
-      "category": "恢复"
+      "category": "恢复",
+      "rarity": "★★★★",
+      "stack": 64,
+      "price": "2000曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "番茄面",
       "effect": "回复20体力",
-      "category": "体力"
+      "category": "体力",
+      "rarity": "★",
+      "stack": 64,
+      "price": "50曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "血红葡萄酒",
-      "effect": "回复200血量",
-      "category": "恢复"
+      "effect": "回复200血量，并增加温暖值",
+      "category": "恢复",
+      "rarity": "★",
+      "stack": 64,
+      "price": "30曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "香精煎鱼",
       "effect": "回复30体力",
-      "category": "体力"
+      "category": "体力",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "80曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "香翅捞饭",
       "effect": "回复500血量",
-      "category": "恢复"
+      "category": "恢复",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "100曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "牛排",
       "effect": "增加25%攻击，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "150曙光灵石",
+      "cooldown": "无",
+      "note": "可与技能叠加"
     },
     {
       "name": "香菜凤仁鸡",
       "effect": "增加30%攻击，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "300曙光灵石",
+      "cooldown": "无",
+      "note": "比牛排效果更强"
     },
     {
       "name": "杰哥啤酒",
       "effect": "增加100%攻击，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "800曙光灵石",
+      "cooldown": "无",
+      "note": "最强攻击增益食物"
     },
     {
       "name": "星砂布丁",
       "effect": "增加15%暴击率，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "500曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "永夜浆果挞",
       "effect": "增加15%暴击伤害，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "500曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "好果汁",
-      "effect": "增加15%暴击率，持续500秒",
-      "category": "增益"
+      "effect": "增加25%暴击伤害，持续500秒",
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "600曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "残响之果",
       "effect": "回复20体力",
-      "category": "体力"
+      "category": "体力",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "残响之地获取",
+      "cooldown": "无"
     },
     {
       "name": "回声之果",
       "effect": "回复200血量",
-      "category": "恢复"
+      "category": "恢复",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "残响之地获取",
+      "cooldown": "无"
     },
     {
       "name": "破碎之果",
       "effect": "增加25%攻击，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "残响之地获取",
+      "cooldown": "无"
     },
     {
       "name": "龙肉排",
       "effect": "回复35体力",
-      "category": "体力"
+      "category": "体力",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "击败焚世赤焰邪龙掉落",
+      "cooldown": "无"
     },
     {
       "name": "魔法之豆",
       "effect": "回复400血量",
-      "category": "恢复"
+      "category": "恢复",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "100曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "激化之水",
       "effect": "增加35%攻击，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "400曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "狂乱之水",
       "effect": "增加25%暴击率，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "600曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "星辰海酒",
       "effect": "增加45%暴击伤害，持续500秒",
-      "category": "增益"
+      "category": "增益",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "800曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "寒霜精油",
       "effect": "增加20%冰元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "200曙光灵石",
+      "cooldown": "无",
+      "note": "适合探索至北雪山"
     },
     {
       "name": "烈焰精油",
       "effect": "增加20%火元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "200曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "雷蛰精油",
       "effect": "增加20%雷元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "200曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "暴风精油",
       "effect": "增加20%风元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "200曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "蔓草精油",
       "effect": "增加20%草元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "200曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "磐岩精油",
       "effect": "增加20%岩元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "200曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "水纹精油",
       "effect": "增加20%水元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "200曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "寒霜圣水",
       "effect": "增加30%冰元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "500曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "烈焰圣水",
       "effect": "增加30%火元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "500曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "雷蛰圣水",
       "effect": "增加30%雷元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "500曙光灵石",
+      "cooldown": "无"
     },
     {
       "name": "暴风圣水",
       "effect": "增加30%风元素抗性，持续500秒",
-      "category": "抗性"
+      "category": "抗性",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "500曙光灵石",
+      "cooldown": "无"
+    },
+    {
+      "name": "遗忘药水",
+      "effect": "遗忘一个已学习的技能",
+      "category": "特殊",
+      "rarity": "★★★★",
+      "stack": 64,
+      "price": "魔法师协会购买",
+      "cooldown": "无"
+    },
+    {
+      "name": "史诗级资源宝盒",
+      "effect": "选择获得曙光灵石x1000或技能点x200或机械碎片x2500",
+      "category": "宝箱",
+      "rarity": "★★★★",
+      "stack": 64,
+      "price": "活动奖励",
+      "cooldown": "无",
+      "note": "局外使用"
+    },
+    {
+      "name": "稀有级资源宝盒",
+      "effect": "选择获得曙光灵石x200或技能点x50或机械碎片x400",
+      "category": "宝箱",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "活动奖励",
+      "cooldown": "无",
+      "note": "局外使用"
+    },
+    {
+      "name": "普通级资源宝盒",
+      "effect": "选择获得曙光灵石x20或技能点x10或机械碎片x40",
+      "category": "宝箱",
+      "rarity": "★★",
+      "stack": 64,
+      "price": "活动奖励",
+      "cooldown": "无",
+      "note": "局外使用"
+    },
+    {
+      "name": "活动券",
+      "effect": "用于抽奖活动",
+      "category": "特殊",
+      "rarity": "★★★",
+      "stack": 64,
+      "price": "活动获取",
+      "cooldown": "无"
+    },
+    {
+      "name": "净水的甘露",
+      "effect": "高级恢复道具",
+      "category": "恢复",
+      "rarity": "★★★★",
+      "stack": 64,
+      "price": "稀有掉落",
+      "cooldown": "无"
+    },
+    {
+      "name": "净水的源初",
+      "effect": "稀有材料，用于高级突破",
+      "category": "材料",
+      "rarity": "★★★★",
+      "stack": 64,
+      "price": "稀有掉落",
+      "cooldown": "无"
+    },
+    {
+      "name": "灼火之心",
+      "effect": "火系高级材料",
+      "category": "材料",
+      "rarity": "★★★★",
+      "stack": 64,
+      "price": "稀有掉落",
+      "cooldown": "无"
+    },
+    {
+      "name": "爆炎之心",
+      "effect": "火系稀有材料",
+      "category": "材料",
+      "rarity": "★★★★",
+      "stack": 64,
+      "price": "稀有掉落",
+      "cooldown": "无"
+    },
+    {
+      "name": "渊界之域的记忆",
+      "effect": "击败渊之魔女掉落的稀有物品",
+      "category": "特殊",
+      "rarity": "★★★★★",
+      "stack": 64,
+      "price": "渊之魔女掉落",
+      "cooldown": "无",
+      "note": "用于高级突破"
+    },
+    {
+      "name": "皮肤祈愿宝箱",
+      "effect": "开启后可获得随机皮肤",
+      "category": "特殊",
+      "rarity": "★★★★★",
+      "stack": 64,
+      "price": "Boss掉落(3%概率)",
+      "cooldown": "无"
     }
   ],
   "materials": [
     {
       "name": "破碎冰晶",
-      "usage": "冰灵掉落，基础材料",
-      "category": "冰系"
+      "usage": "冰灵水晶掉落，基础材料，用于合成和突破",
+      "category": "冰系",
+      "rarity": "★",
+      "source": "冰灵水晶(等级≤40)100%掉落"
     },
     {
       "name": "严寒冰晶",
-      "usage": "高级冰系材料",
-      "category": "冰系"
+      "usage": "完整的带有魔力的冰晶，靠近能感到一股寒意",
+      "category": "冰系",
+      "rarity": "★★",
+      "source": "冰灵水晶(等级>40)70%掉落"
     },
     {
       "name": "冰冷核心",
-      "usage": "稀有材料，来自至北雪山",
-      "category": "冰系"
+      "usage": "来自至北雪山的冰冷核心，蕴藏着一股至寒之力",
+      "category": "冰系",
+      "rarity": "★★★",
+      "source": "冰灵水晶(等级>70)50%掉落"
     },
     {
       "name": "机械之心",
-      "usage": "机甲类敌人掉落",
-      "category": "机械"
+      "usage": "由智慧之塔的学者研究出的精密核心，是大型机械的重要组成部分",
+      "category": "机械",
+      "rarity": "★★★",
+      "source": "魔力传导训练机甲100%掉落"
     },
     {
       "name": "泥潭水晶",
-      "usage": "岩灵掉落的破碎的带有魔力的土块",
-      "category": "岩系"
+      "usage": "岩灵水晶掉落的破碎的带有魔力的土块",
+      "category": "岩系",
+      "rarity": "★",
+      "source": "岩灵水晶(等级≤40)100%掉落"
     },
     {
       "name": "坚石之核",
       "usage": "完整的带有魔力的岩核，靠近能感到一股大地的力量",
-      "category": "岩系"
+      "category": "岩系",
+      "rarity": "★★",
+      "source": "岩灵水晶(等级>40)70%掉落"
     },
     {
       "name": "磐岩之心",
       "usage": "来自地底深处的磐岩之心，蕴藏着一股坚不可摧的力量",
-      "category": "岩系"
+      "category": "岩系",
+      "rarity": "★★★",
+      "source": "岩灵水晶(等级>70)50%掉落"
     },
     {
       "name": "坚硬之骨",
-      "usage": "骷髅掉落，基础材料",
-      "category": "骨系"
+      "usage": "常年残骸留下的坚硬的骨头，基础骨系材料",
+      "category": "骨系",
+      "rarity": "★",
+      "source": "骷髅类敌人(等级≤40)100%掉落"
     },
     {
       "name": "精炼之骨",
-      "usage": "高级骨系材料",
-      "category": "骨系"
+      "usage": "残骸中特殊手段提炼的精炼的骨头",
+      "category": "骨系",
+      "rarity": "★★",
+      "source": "骷髅类敌人(等级>40)70%掉落"
     },
     {
       "name": "灵魂之骨",
-      "usage": "稀有材料，充斥着怨气",
-      "category": "骨系"
+      "usage": "充斥着怨气的灵魂之骨，高级骨系材料",
+      "category": "骨系",
+      "rarity": "★★★",
+      "source": "骷髅类敌人(等级>70)50%掉落"
     },
     {
       "name": "剧毒之心",
-      "usage": "剧毒之王遗留的核心",
-      "category": "毒系"
+      "usage": "剧毒之王遗留的充满剧毒之力的核心",
+      "category": "毒系",
+      "rarity": "★★★",
+      "source": "剧毒蛛王100%掉落"
     },
     {
       "name": "雪怪水晶",
-      "usage": "雪怪掉落的魔力水晶",
-      "category": "冰系"
+      "usage": "雪怪内部维持其正常运转的魔力水晶",
+      "category": "冰系",
+      "rarity": "★",
+      "source": "雪怪(等级≤40)100%掉落"
     },
     {
       "name": "雪怪之核",
-      "usage": "雪怪的灵魂核心",
-      "category": "冰系"
+      "usage": "赋予雪怪灵魂，给予其力量的魔法核心",
+      "category": "冰系",
+      "rarity": "★★",
+      "source": "雪怪(等级>40)70%掉落"
     },
     {
       "name": "至寒之石",
-      "usage": "极为冰冷的晶石",
-      "category": "冰系"
+      "usage": "极为冰冷的晶石，令人不敢触碰",
+      "category": "冰系",
+      "rarity": "★★★",
+      "source": "雪怪(等级>70)50%掉落"
     },
     {
       "name": "冰皇之冕",
-      "usage": "冰雪女王掉落的皇冠",
-      "category": "冰系"
+      "usage": "由冰雪女王掉落的珍贵皇冠，象征着统御冰雪的力量",
+      "category": "冰系",
+      "rarity": "★★★★",
+      "source": "冰雪女王100%掉落"
     },
     {
       "name": "鸣雷能量存储核心",
-      "usage": "能量存储装置",
-      "category": "雷系"
+      "usage": "由智慧之塔的学者研究出的能量存储装置，可以持续运行数百年之久",
+      "category": "雷系",
+      "rarity": "★★★",
+      "source": "鸣雷重机100%掉落"
     },
     {
       "name": "赤焰之心",
-      "usage": "邪龙体内的力量来源",
-      "category": "火系"
+      "usage": "邪龙体内的力量来源，火系高级材料",
+      "category": "火系",
+      "rarity": "★★★",
+      "source": "焚世赤焰邪龙100%掉落"
     },
     {
-      "name": "净水的一滴",
-      "usage": "智慧之塔的学者实验产物",
-      "category": "水系"
+      "name": "一阶魔法水晶",
+      "usage": "极其珍贵的宝石，可以帮助魔法师突破等级上限",
+      "category": "特殊",
+      "rarity": "★★★★",
+      "source": "暂时不可获取"
     },
     {
-      "name": "净水的甘露",
-      "usage": "雷电对抗水灵水晶的关键",
-      "category": "水系"
+      "name": "木材",
+      "usage": "基础建筑材料，可用于建造和合成",
+      "category": "基础",
+      "rarity": "★",
+      "source": "伐木获取"
     },
     {
-      "name": "净水的源初",
-      "usage": "源源不断产生水灵水晶的原因",
-      "category": "水系"
+      "name": "木板",
+      "usage": "基础建筑材料，由木材加工而成",
+      "category": "基础",
+      "rarity": "★",
+      "source": "木材合成"
     },
     {
-      "name": "灼火残焰",
-      "usage": "火灵水晶蕴藏着的不屈意志",
-      "category": "火系"
+      "name": "泥土",
+      "usage": "基础建筑材料，可用于建造",
+      "category": "基础",
+      "rarity": "★",
+      "source": "挖掘获取"
     },
     {
-      "name": "灼火之心",
-      "usage": "纵使是烈火，也会在水的力量前熄灭",
-      "category": "火系"
+      "name": "沙子",
+      "usage": "基础建筑材料，可用于建造",
+      "category": "基础",
+      "rarity": "★",
+      "source": "沙漠区域挖掘"
     },
     {
-      "name": "爆炎之心",
-      "usage": "蕴含爆炸性火焰力量的核心",
-      "category": "火系"
+      "name": "石头",
+      "usage": "基础建筑材料，可用于建造",
+      "category": "基础",
+      "rarity": "★",
+      "source": "挖掘获取"
+    },
+    {
+      "name": "深石",
+      "usage": "基础建筑材料，深色石材",
+      "category": "基础",
+      "rarity": "★",
+      "source": "深层挖掘"
+    },
+    {
+      "name": "岩石",
+      "usage": "基础建筑材料，可用于建造",
+      "category": "基础",
+      "rarity": "★",
+      "source": "挖掘获取"
+    },
+    {
+      "name": "南瓜",
+      "usage": "基础建筑材料，装饰用",
+      "category": "基础",
+      "rarity": "★",
+      "source": "采集获取"
+    },
+    {
+      "name": "甘蔗",
+      "usage": "基础建筑材料，可用于合成",
+      "category": "基础",
+      "rarity": "★",
+      "source": "采集获取"
+    },
+    {
+      "name": "铜矿",
+      "usage": "含有100点耐久值，可以用于修复破损的装备",
+      "category": "矿石",
+      "rarity": "★",
+      "source": "矿洞挖掘"
+    },
+    {
+      "name": "铁矿",
+      "usage": "含有500点耐久值，可以用于修复破损的装备",
+      "category": "矿石",
+      "rarity": "★★",
+      "source": "深层矿洞挖掘"
+    },
+    {
+      "name": "曙光灵石",
+      "usage": "游戏主要货币，用于购买物品和服务",
+      "category": "货币",
+      "rarity": "★★",
+      "source": "击败敌人、完成任务、开宝箱"
+    },
+    {
+      "name": "机械碎片",
+      "usage": "高级货币，用于武器升级",
+      "category": "货币",
+      "rarity": "★★★",
+      "source": "击败机械敌人、开宝箱"
+    },
+    {
+      "name": "残响碎片",
+      "usage": "稀有货币，用于高级武器升级",
+      "category": "货币",
+      "rarity": "★★★★",
+      "source": "残响之地获取"
+    },
+    {
+      "name": "技能点",
+      "usage": "用于学习和升级技能",
+      "category": "特殊",
+      "rarity": "★★★",
+      "source": "击败敌人、开宝箱、完成任务"
+    },
+    {
+      "name": "星辰碎屑",
+      "usage": "特殊货币，用于特殊合成",
+      "category": "特殊",
+      "rarity": "★★★★",
+      "source": "特殊活动"
+    }
+  ],
+  "tools": [
+    {
+      "name": "工作台",
+      "usage": "用于合成物品的基础设施",
+      "category": "设施",
+      "rarity": "★",
+      "durability": 64
+    },
+    {
+      "name": "熔炉",
+      "usage": "用于熔炼矿石的基础设施",
+      "category": "设施",
+      "rarity": "★",
+      "durability": 64
     }
   ]
 }

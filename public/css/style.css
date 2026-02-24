@@ -650,6 +650,28 @@
             font-weight: 500;
         }
 
+        .growth-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .growth-table th, .growth-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .growth-table th {
+            background: rgba(212, 175, 55, 0.25);
+            color: #8B4513;
+            font-weight: bold;
+        }
+
+        .growth-table tr:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
         .table-wrapper {
             overflow-x: auto;
             border-radius: 8px;
