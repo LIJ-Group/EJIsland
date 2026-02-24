@@ -1,11 +1,11 @@
-const CACHE_NAME = 'ejisland-v6';
+const CACHE_NAME = 'ejisland-v7';
 const STATIC_ASSETS = [
-    '/',
-    '/index.html',
-    '/public/css/style.css',
-    '/public/images/LOGO.png',
-    '/public/images/backGround.webp',
-    '/public/images/favicon.png'
+    '/EJIsland/',
+    '/EJIsland/index.html',
+    '/EJIsland/public/css/style.css',
+    '/EJIsland/public/images/LOGO.png',
+    '/EJIsland/public/images/backGround.webp',
+    '/EJIsland/public/images/favicon.png'
 ];
 
 const DATA_CACHE_NAME = 'ejisland-data-v1';
@@ -52,32 +52,16 @@ self.addEventListener('fetch', (event) => {
                     });
             })
         );
-        return;
-    }
-    
-    if (url.pathname.endsWith('.js') || url.pathname.endsWith('.css') || url.pathname.endsWith('.png') || url.pathname.endsWith('.webp')) {
+    } else {
         event.respondWith(
             caches.match(event.request).then((response) => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).then((networkResponse) => {
-                    if (networkResponse.ok) {
-                        const responseClone = networkResponse.clone();
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(event.request, responseClone);
-                        });
-                    }
-                    return networkResponse;
+                return response || fetch(event.request).then((fetchResponse) => {
+                    return caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(event.request, fetchResponse.clone());
+                        return fetchResponse;
+                    });
                 });
             })
         );
-        return;
     }
-    
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
-        })
-    );
 });

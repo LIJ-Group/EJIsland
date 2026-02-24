@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', initApp);
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
+        navigator.serviceWorker.register('/EJIsland/sw.js')
             .then((registration) => {
                 console.log('SW registered:', registration.scope);
             })
