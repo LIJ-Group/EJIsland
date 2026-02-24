@@ -1,6 +1,6 @@
 import { handleResize } from './utils.js';
 import { loadAllData } from './data.js';
-import { renderAreas, renderWeapons, renderArmors, renderBossEnemies, renderNormalEnemies, renderItems, renderDamage, renderElement, renderSkills, renderGrowth, renderQuests, renderTips, renderUpload, renderReview, toggleCode } from './renderer.js';
+import { renderAreas, renderWeapons, renderArmors, renderBossEnemies, renderNormalEnemies, renderItems, renderDamage, renderElement, renderSkills, renderGrowth, renderQuests, renderTips, renderUpload, renderReview, renderBosses, renderTeleports, toggleCode } from './renderer.js';
 import { initPagination } from './pagination.js';
 import { initSearchEventListeners } from './search.js';
 import { initUI } from './ui.js';
@@ -76,6 +76,8 @@ async function initApp() {
         scheduleRender(renderSkills, 2);
         scheduleRender(renderGrowth, 1);
         scheduleRender(renderQuests, 0);
+        scheduleRender(renderBosses, 0);
+        scheduleRender(renderTeleports, 0);
         scheduleRender(renderTips, 0);
         scheduleRender(renderUpload, 0);
         scheduleRender(renderReview, 0);

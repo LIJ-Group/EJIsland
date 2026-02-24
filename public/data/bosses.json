@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "name": "冰雪女王",
+    "area": "至北雪山",
+    "type": "Boss战",
+    "bounds": [
+      {
+        "min": { "x": 55, "y": 0, "z": 165.5 },
+        "max": { "x": 101.5, "y": 24.5, "z": 203.5 }
+      }
+    ],
+    "position": { "x": 17.5, "y": 2, "z": 169.5 },
+    "music": "JWoods - Outburster",
+    "difficulty": "中等等级"
+  },
+  {
+    "id": 2,
+    "name": "鸣雷重机",
+    "area": "鹰崖城",
+    "type": "Boss战",
+    "bounds": [
+      {
+        "min": { "x": 188, "y": 44, "z": 16 },
+        "max": { "x": 221, "y": 80, "z": 104 }
+      }
+    ],
+    "position": { "x": 192.5, "y": 29, "z": 37.5 },
+    "music": "Frozen Destiny",
+    "difficulty": "高难度"
+  },
+  {
+    "id": 3,
+    "name": "剧毒蛛王",
+    "area": "埋骨峡谷",
+    "type": "Boss战",
+    "bounds": [
+      {
+        "min": { "x": 0, "y": 0, "z": 502 },
+        "max": { "x": 41, "y": 26, "z": 549 }
+      }
+    ],
+    "position": { "x": 44.5, "y": 11, "z": 506.5 },
+    "music": "Akhuta - Glitter Flatter Scatter",
+    "difficulty": "中等等级"
+  },
+  {
+    "id": 4,
+    "name": "渊之魔女",
+    "area": "寒冰之心",
+    "type": "Boss战",
+    "bounds": [
+      { "min": { "x": 89, "y": 39, "z": 430 }, "max": { "x": 130, "y": 128, "z": 505 } },
+      { "min": { "x": 81, "y": 39, "z": 430 }, "max": { "x": 89, "y": 128, "z": 500 } },
+      { "min": { "x": 76, "y": 39, "z": 433 }, "max": { "x": 81, "y": 128, "z": 498 } },
+      { "min": { "x": 60, "y": 39, "z": 433 }, "max": { "x": 76, "y": 128, "z": 474 } },
+      { "min": { "x": 65, "y": 39, "z": 474 }, "max": { "x": 76, "y": 128, "z": 479 } },
+      { "min": { "x": 71, "y": 39, "z": 479 }, "max": { "x": 76, "y": 128, "z": 497 } }
+    ],
+    "position": { "x": 52.5, "y": 27, "z": 434.5 },
+    "music": "Idealized Romance",
+    "difficulty": "高难度"
+  },
+  {
+    "id": 5,
+    "name": "焚世赤焰邪龙",
+    "area": "残响之地",
+    "type": "世界Boss",
+    "bounds": [
+      {
+        "min": { "x": 156, "y": 1, "z": 206 },
+        "max": { "x": 195.5, "y": 16, "z": 241 }
+      }
+    ],
+    "position": { "x": 197.5, "y": 2, "z": 223.5 },
+    "music": "Kronos",
+    "difficulty": "最高难度",
+    "note": "世界Boss，需多人协作"
+  }
+]

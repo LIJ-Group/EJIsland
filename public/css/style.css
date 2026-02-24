@@ -878,6 +878,103 @@
                 0 4px 14px rgba(139, 69, 19, 0.09),
         }
 
+        .boss-card, .teleport-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.56), rgba(255, 248, 231, 0.5));
+            backdrop-filter: blur(6.5px);
+            -webkit-backdrop-filter: blur(6.5px);
+            border-radius: 13px;
+            padding: 20px;
+            border: 1.5px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+            box-shadow: 
+                0 11px 36px rgba(139, 69, 19, 0.15),
+                0 5px 16px rgba(139, 69, 19, 0.09),
+                0 2px 7px rgba(139, 69, 19, 0.045),
+                inset 0 0.9px 0 rgba(255, 255, 255, 0.34),
+                inset 0 -0.9px 0 rgba(139, 69, 19, 0.04);
+        }
+
+        .boss-card:hover, .teleport-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: rgba(212, 175, 55, 0.44);
+        }
+
+        .boss-card h4, .teleport-card h4 {
+            color: #8B4513;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .boss-card p, .teleport-card p {
+            color: #5D4037;
+            margin: 6px 0;
+            font-size: 0.95em;
+        }
+
+        .boss-card .boss-area, .boss-card .boss-type,
+        .teleport-card .tp-area, .teleport-card .tp-type {
+            color: #6D4C41;
+            font-weight: 500;
+        }
+
+        .boss-card .boss-difficulty, .teleport-card .tp-unlock {
+            color: #D84315;
+            font-weight: 600;
+        }
+
+        .boss-card .boss-position, .boss-card .boss-spawn {
+            background: rgba(139, 69, 19, 0.08);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .boss-card .bounds-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #4E342E;
+        }
+
+        .boss-card .boss-note {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.15), rgba(255, 87, 34, 0.1));
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #FF9800;
+            color: #E65100 !important;
+            font-weight: 500;
+        }
+
+        .teleport-card .tp-desc {
+            color: #6D4C41;
+            font-style: italic;
+        }
+
+        .teleport-card .tp-position {
+            font-family: 'Courier New', monospace;
+            color: #4E342E;
+            background: rgba(139, 69, 19, 0.08);
+            padding: 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        #bosses-content, #teleports-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .empty-message {
+            color: #8D6E63;
+            font-style: italic;
+            text-align: center;
+            padding: 40px;
+            grid-column: 1 / -1;
+        }
+
         .skill-levels {
             margin-top: 16px;
             padding-top: 16px;
@@ -2032,7 +2129,7 @@
                 margin-top: 25px;
             }
 
-            .area-card, .enemy-card, .weapon-card, .skill-card, .element-card {
+            .area-card, .enemy-card, .weapon-card, .skill-card, .element-card, .boss-card, .teleport-card {
                 padding: 25px;
             }
 

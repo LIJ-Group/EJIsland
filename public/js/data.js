@@ -17,6 +17,8 @@ export let elementData = [];
 export let elementReactionData = [];
 export let skillData = [];
 export let questData = [];
+export let bossData = [];
+export let teleportData = [];
 
 const dataCache = new Map();
 const CACHE_DURATION = 5 * 60 * 1000;
@@ -49,6 +51,8 @@ export const gameData = {
     get elementReactions() { return elementReactionData; },
     get skills() { return skillData; },
     get quests() { return questData; },
+    get bosses() { return bossData; },
+    get teleports() { return teleportData; },
     setWeapons: function(data) { weaponData = data; },
     setEnemies: function(data) { enemyData = data; },
     setArmors: function(data) { armorData = data; },
@@ -58,6 +62,8 @@ export const gameData = {
     setElementReactions: function(data) { elementReactionData = data; },
     setSkills: function(data) { skillData = data; },
     setQuests: function(data) { questData = data; },
+    setBosses: function(data) { bossData = data; },
+    setTeleports: function(data) { teleportData = data; },
     getWeaponsByType: function(type) {
         return this.weapons.filter(w => w.type === type);
     },
@@ -157,6 +163,28 @@ export async function loadAreaData() {
     }
 }
 
+export async function loadBossData() {
+    try {
+        const data = await fetchWithCache("public/data/bosses.json");
+        gameData.setBosses(data);
+        return data;
+    } catch (error) {
+        console.error('加载Boss数据失败:', error);
+        return [];
+    }
+}
+
+export async function loadTeleportData() {
+    try {
+        const data = await fetchWithCache("public/data/teleports.json");
+        gameData.setTeleports(data);
+        return data;
+    } catch (error) {
+        console.error('加载传送点数据失败:', error);
+        return [];
+    }
+}
+
 export async function loadElementData() {
     try {
         const data = await fetchWithCache("public/data/elements.json");
@@ -215,7 +243,9 @@ export async function loadAllData() {
         loadElementData(),
         loadElementReactionData(),
         loadSkillData(),
-        loadQuestData()
+        loadQuestData(),
+        loadBossData(),
+        loadTeleportData()
     ]);
     
     dataLoaded = true;

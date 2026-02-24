@@ -1,5 +1,5 @@
 import { escapeHtml } from './utils.js';
-import { gameData, weaponData, armorData, enemyData, areaData, itemData, elementData, elementReactionData, skillData, questData } from './data.js';
+import { gameData, weaponData, armorData, enemyData, areaData, itemData, elementData, elementReactionData, skillData, questData, bossData, teleportData } from './data.js';
 import { toast } from './toast.js';
 
 export function createWeaponCard(item) {
@@ -522,6 +522,62 @@ export function renderQuests() {
     });
 
     questsContent.innerHTML = html;
+}
+
+export function renderBosses() {
+    const bossesContent = document.getElementById('bosses-content');
+    if (!bossesContent) return;
+
+    let html = '';
+    bossData.forEach(boss => {
+        const boundsStr = boss.bounds.map(b => 
+            `X: ${b.min.x}~${b.max.x}, Y: ${b.min.y}~${b.max.y}, Z: ${b.min.z}~${b.max.z}`
+        ).join('；<br>');
+        
+        html += `
+            <div class="boss-card">
+                <h4>${boss.name}</h4>
+                <p class="boss-area">所属区域：${boss.area}</p>
+                <p class="boss-type">类型：${boss.type}</p>
+                <p class="boss-difficulty">难度：${boss.difficulty}</p>
+                <div class="boss-position">
+                    <p><strong>战斗区域坐标：</strong></p>
+                    <p class="bounds-text">${boundsStr}</p>
+                </div>
+                <div class="boss-spawn">
+                    <p><strong>生成点坐标：</strong>(${boss.position.x}, ${boss.position.y}, ${boss.position.z})</p>
+                </div>
+                ${boss.music ? `<p><strong>战斗音乐：</strong>${boss.music}</p>` : ''}
+                ${boss.note ? `<p class="boss-note">${boss.note}</p>` : ''}
+            </div>
+        `;
+    });
+
+    bossesContent.innerHTML = html || '<p class="empty-message">暂无Boss数据</p>';
+}
+
+export function renderTeleports() {
+    const teleportsContent = document.getElementById('teleports-content');
+    if (!teleportsContent) return;
+
+    let html = '';
+    teleportData.forEach(tp => {
+        const posStr = tp.position ? 
+            `(${tp.position.x}, ${tp.position.y}, ${tp.position.z})` : '位置未知';
+        
+        html += `
+            <div class="teleport-card">
+                <h4>${tp.name}</h4>
+                <p class="tp-area">所属区域：${tp.area}</p>
+                <p class="tp-type">类型：${tp.type}</p>
+                <p class="tp-desc">${tp.description}</p>
+                <p class="tp-position"><strong>坐标：</strong>${posStr}</p>
+                <p class="tp-unlock"><strong>解锁条件：</strong>${tp.unlock}</p>
+            </div>
+        `;
+    });
+
+    teleportsContent.innerHTML = html || '<p class="empty-message">暂无传送点数据</p>';
 }
 
 export function renderSkills() {
