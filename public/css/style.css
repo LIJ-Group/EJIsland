@@ -404,7 +404,7 @@
             border-left: 5px solid #D4AF37;
             padding: 24px;
             margin: 24px 0;
-            border-radius: 14px;
+            border-radius: 4px;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 
                 0 10px 30px rgba(212, 175, 55, 0.2),
@@ -422,7 +422,7 @@
             right: 0;
             height: 40%;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
-            border-radius: 14px 14px 0 0;
+            border-radius: 4px 4px 0 0;
             pointer-events: none;
         }
 
@@ -441,7 +441,7 @@
             border-left: 5px solid #FF8C00;
             padding: 24px;
             margin: 24px 0;
-            border-radius: 14px;
+            border-radius: 4px;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 
                 0 10px 30px rgba(255, 140, 0, 0.2),
@@ -478,7 +478,7 @@
             border-left: 5px solid #8B4513;
             padding: 24px;
             margin: 24px 0;
-            border-radius: 14px;
+            border-radius: 4px;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 
                 0 10px 30px rgba(139, 69, 19, 0.18),
@@ -496,7 +496,7 @@
             right: 0;
             height: 40%;
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent);
-            border-radius: 14px 14px 0 0;
+            border-radius: 4px 4px 0 0;
             pointer-events: none;
         }
 
@@ -506,6 +506,41 @@
                 0 14px 40px rgba(139, 69, 19, 0.25),
                 inset 0 -8px 25px rgba(139, 69, 19, 0.1),
                 inset 0 8px 20px rgba(255, 255, 255, 0.6);
+        }
+
+        .credits-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .credits-chip {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(212, 175, 55, 0.06));
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 4px;
+            padding: 12px 18px;
+            display: flex;
+            flex-direction: column;
+            min-width: 140px;
+            transition: all 0.2s ease;
+        }
+
+        .credits-chip:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+            transform: translateY(-2px);
+        }
+
+        .chip-label {
+            color: #8B7355;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .chip-value {
+            color: #5D4037;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .area-grid {
@@ -519,7 +554,7 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(255, 248, 231, 0.62));
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 12px;
+            border-radius: 4px;
             padding: 35px;
             border: 3px solid rgba(212, 175, 55, 0.3);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -580,7 +615,7 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(255, 248, 231, 0.58));
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 10px;
+            border-radius: 4px;
             padding: 24px;
             border: 3px solid rgba(205, 133, 63, 0.3);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -674,7 +709,7 @@
 
         .table-wrapper {
             overflow-x: auto;
-            border-radius: 8px;
+            border-radius: 4px;
             -webkit-overflow-scrolling: touch;
         }
 
@@ -696,7 +731,7 @@
 
         .weapon-card {
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
+            border-radius: 4px;
             padding: 20px;
             border: 1px solid rgba(212, 175, 55, 0.3);
             transition: all 0.3s ease;
@@ -762,7 +797,7 @@
             background: rgba(212, 175, 55, 0.15);
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
-            border-radius: 6px;
+            border-radius: 4px;
             padding: 30px;
             margin: 25px 0;
             border: 2px solid rgba(212, 175, 55, 0.3);
@@ -771,7 +806,7 @@
         .formula-box {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 231, 0.95));
             border: 2px solid #D4AF37;
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 20px;
             margin: 18px 0;
             border-left: 4px solid #FF8C00;
@@ -958,7 +993,7 @@
         .formula-box {
             background: rgba(212, 175, 55, 0.1);
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 4px;
             margin: 15px 0;
             border-left: 4px solid #D4AF37;
         }
@@ -969,7 +1004,7 @@
             margin: 10px 0;
             padding: 8px;
             background: rgba(255, 248, 231, 0.8);
-            border-radius: 6px;
+            border-radius: 3px;
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
@@ -983,7 +1018,7 @@
         .quest-item {
             background: rgba(255, 248, 231, 0.8);
             padding: 16px;
-            border-radius: 10px;
+            border-radius: 4px;
             border-left: 4px solid #D4AF37;
             transition: all 0.3s ease;
         }
@@ -1044,7 +1079,7 @@
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 10px;
+            border-radius: 4px;
             padding: 20px;
             border: 2px solid rgba(205, 133, 63, 0.3);
             text-align: center;
@@ -1110,7 +1145,7 @@
             -webkit-backdrop-filter: blur(8px);
             border-top: 2px solid rgba(212, 175, 55, 0.3);
             margin-top: 40px;
-            border-radius: 6px;
+            border-radius: 3px;
         }
 
         footer p {
@@ -1196,7 +1231,7 @@
             background: linear-gradient(135deg, #FF6B6B, #FF8E53);
             color: #FFF8E7;
             padding: 4px 12px;
-            border-radius: 12px;
+            border-radius: 4px;
             font-size: 0.75em;
             font-weight: bold;
             box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
@@ -1220,7 +1255,7 @@
             gap: 0;
             margin-bottom: 15px;
             position: relative;
-            border-radius: 6px;
+            border-radius: 3px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
         }
@@ -1235,7 +1270,7 @@
             padding: 8px 14px;
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-right: none;
-            border-radius: 6px 0 0 6px;
+            border-radius: 3px 0 0 3px;
             background: rgba(255, 248, 231, 0.95);
             color: #5D4037;
             font-size: 0.85em;
@@ -1280,7 +1315,7 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1.5px solid rgba(212, 175, 55, 0.35);
-            border-radius: 10px;
+            border-radius: 4px;
             max-height: 320px;
             overflow-y: auto;
             box-shadow: 
@@ -1648,7 +1683,7 @@
 
         .table-wrapper {
             overflow-x: auto;
-            border-radius: 8px;
+            border-radius: 4px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
@@ -1777,7 +1812,7 @@
             height: 50px;
             background: linear-gradient(135deg, rgba(205, 133, 63, 0.95), rgba(180, 110, 45, 0.92));
             border: 2px solid rgba(255, 248, 231, 0.3);
-            border-radius: 10px;
+            border-radius: 4px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
             transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -2273,7 +2308,7 @@
             padding: 10px 20px;
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(205, 133, 63, 0.15));
             border: 2px solid rgba(212, 175, 55, 0.35);
-            border-radius: 6px;
+            border-radius: 3px;
             color: #8B4513;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -2603,7 +2638,7 @@
             background: rgba(255, 248, 231, 0.75);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-radius: 18px;
+            border-radius: 3px;
             border: 2px solid rgba(212, 175, 55, 0.35);
             box-shadow: 0 8px 32px rgba(139, 69, 19, 0.15);
         }

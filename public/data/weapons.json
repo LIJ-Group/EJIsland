@@ -351,5 +351,25 @@
     "get": "残响渊之魔女战利品",
     "element": "暗",
     "serverCode": "161: new ItemType(161,'渊界撕裂者',4).cd([cdA(10)]).toequip([{bodyPart: GameBodyPart.RIGHT_HAND,mesh: 'mesh/渊界撕裂者.vb',offset: [0,-0.3,0.9],orientation: Quat.rotateZ(-0.3),scale: [0.5,0.5,0.5],}],0,2600,(x)=>{return `Lv${x.params.level}.${x.params.name}`},null,null,{'action0'({ entity, item }) {}})"
+  },
+  {
+    "name": "天圣裂渊戟",
+    "desc": "此武器为废案",
+    "type": "未知",
+    "rarity": "未知",
+    "damage": "未知",
+    "get": "未知",
+    "element": "未知",
+    "serverCode": "无"
+  },
+  {
+    "name": "噬毒魔刃",
+    "desc": "此武器为废案",
+    "type": "未知",
+    "rarity": "未知",
+    "damage": "未知",
+    "get": "未知",
+    "element": "未知",
+    "serverCode": "无"
   }
 ]
