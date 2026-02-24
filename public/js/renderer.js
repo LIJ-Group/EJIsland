@@ -270,7 +270,7 @@ export function renderItems() {
             <div class="item-category">
                 <table class="item-table consumables-table">
                     <thead>
-                        <tr><th>名称</th><th>效果</th><th>类别</th><th>稀有度</th><th>价格</th><th>堆叠</th><th>冷却</th></tr>
+                        <tr><th>名称</th><th>效果</th><th>类别</th><th>稀有度</th><th>价格</th><th>获取方式</th><th>堆叠</th><th>冷却</th></tr>
                     </thead>
                     <tbody>
                         ${consumables.map(item => `
@@ -280,6 +280,7 @@ export function renderItems() {
                                 <td>${item.category || ''}</td>
                                 <td>${item.rarity || ''}</td>
                                 <td>${item.price || ''}</td>
+                                <td>${item.obtain || ''}</td>
                                 <td>${item.stack || ''}</td>
                                 <td>${item.cooldown || ''}</td>
                             </tr>

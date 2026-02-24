@@ -6,7 +6,7 @@
       "category": "恢复",
       "rarity": "★★",
       "stack": 64,
-      "price": "100曙光灵石",
+      "price": "5曙光灵石",
       "cooldown": "无"
     },
     {
@@ -15,7 +15,7 @@
       "category": "恢复",
       "rarity": "★★★",
       "stack": 64,
-      "price": "500曙光灵石",
+      "price": "10曙光灵石",
       "cooldown": "无"
     },
     {
@@ -24,7 +24,7 @@
       "category": "恢复",
       "rarity": "★★★★",
       "stack": 64,
-      "price": "2000曙光灵石",
+      "price": "20曙光灵石",
       "cooldown": "无"
     },
     {
@@ -33,7 +33,7 @@
       "category": "体力",
       "rarity": "★",
       "stack": 64,
-      "price": "50曙光灵石",
+      "price": "50星辰碎屑",
       "cooldown": "无"
     },
     {
@@ -42,7 +42,7 @@
       "category": "恢复",
       "rarity": "★",
       "stack": 64,
-      "price": "30曙光灵石",
+      "price": "30星辰碎屑",
       "cooldown": "无"
     },
     {
@@ -51,7 +51,7 @@
       "category": "体力",
       "rarity": "★★",
       "stack": 64,
-      "price": "80曙光灵石",
+      "price": "80星辰碎屑",
       "cooldown": "无"
     },
     {
@@ -60,7 +60,7 @@
       "category": "恢复",
       "rarity": "★★",
       "stack": 64,
-      "price": "100曙光灵石",
+      "price": "100星辰碎屑",
       "cooldown": "无"
     },
     {
@@ -69,7 +69,7 @@
       "category": "增益",
       "rarity": "★★",
       "stack": 64,
-      "price": "150曙光灵石",
+      "price": "150星辰碎屑",
       "cooldown": "无",
       "note": "可与技能叠加"
     },
@@ -79,7 +79,7 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "300曙光灵石",
+      "price": "300星辰碎屑",
       "cooldown": "无",
       "note": "比牛排效果更强"
     },
@@ -89,7 +89,7 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "800曙光灵石",
+      "price": "1000星辰碎屑",
       "cooldown": "无",
       "note": "最强攻击增益食物"
     },
@@ -99,7 +99,7 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "500曙光灵石",
+      "price": "500星辰碎屑",
       "cooldown": "无"
     },
     {
@@ -108,7 +108,7 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "500曙光灵石",
+      "price": "500星辰碎屑",
       "cooldown": "无"
     },
     {
@@ -117,7 +117,7 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "600曙光灵石",
+      "price": "1000星辰碎屑",
       "cooldown": "无"
     },
     {
@@ -126,7 +126,8 @@
       "category": "体力",
       "rarity": "★★",
       "stack": 64,
-      "price": "残响之地获取",
+      "price": "24贡献点",
+      "obtain": "残响之地获取",
       "cooldown": "无"
     },
     {
@@ -135,7 +136,8 @@
       "category": "恢复",
       "rarity": "★★",
       "stack": 64,
-      "price": "残响之地获取",
+      "price": "24贡献点",
+      "obtain": "残响之地获取",
       "cooldown": "无"
     },
     {
@@ -144,7 +146,8 @@
       "category": "增益",
       "rarity": "★★",
       "stack": 64,
-      "price": "残响之地获取",
+      "price": "45贡献点",
+      "obtain": "残响之地获取",
       "cooldown": "无"
     },
     {
@@ -153,7 +156,8 @@
       "category": "体力",
       "rarity": "★★★",
       "stack": 64,
-      "price": "击败焚世赤焰邪龙掉落",
+      "price": "35贡献点",
+      "obtain": "击败焚世赤焰邪龙掉落",
       "cooldown": "无"
     },
     {
@@ -162,7 +166,6 @@
       "category": "恢复",
       "rarity": "★★",
       "stack": 64,
-      "price": "100曙光灵石",
       "cooldown": "无"
     },
     {
@@ -171,7 +174,6 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "400曙光灵石",
       "cooldown": "无"
     },
     {
@@ -180,7 +182,6 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "600曙光灵石",
       "cooldown": "无"
     },
     {
@@ -189,7 +190,6 @@
       "category": "增益",
       "rarity": "★★★",
       "stack": 64,
-      "price": "800曙光灵石",
       "cooldown": "无"
     },
     {
@@ -198,7 +198,6 @@
       "category": "抗性",
       "rarity": "★★",
       "stack": 64,
-      "price": "200曙光灵石",
       "cooldown": "无",
       "note": "适合探索至北雪山"
     },
@@ -208,7 +207,6 @@
       "category": "抗性",
       "rarity": "★★",
       "stack": 64,
-      "price": "200曙光灵石",
       "cooldown": "无"
     },
     {
@@ -217,7 +215,6 @@
       "category": "抗性",
       "rarity": "★★",
       "stack": 64,
-      "price": "200曙光灵石",
       "cooldown": "无"
     },
     {
@@ -226,7 +223,6 @@
       "category": "抗性",
       "rarity": "★★",
       "stack": 64,
-      "price": "200曙光灵石",
       "cooldown": "无"
     },
     {
@@ -235,7 +231,6 @@
       "category": "抗性",
       "rarity": "★★",
       "stack": 64,
-      "price": "200曙光灵石",
       "cooldown": "无"
     },
     {
@@ -244,7 +239,6 @@
       "category": "抗性",
       "rarity": "★★",
       "stack": 64,
-      "price": "200曙光灵石",
       "cooldown": "无"
     },
     {
@@ -253,7 +247,6 @@
       "category": "抗性",
       "rarity": "★★",
       "stack": 64,
-      "price": "200曙光灵石",
       "cooldown": "无"
     },
     {
@@ -262,7 +255,6 @@
       "category": "抗性",
       "rarity": "★★★",
       "stack": 64,
-      "price": "500曙光灵石",
       "cooldown": "无"
     },
     {
@@ -271,7 +263,6 @@
       "category": "抗性",
       "rarity": "★★★",
       "stack": 64,
-      "price": "500曙光灵石",
       "cooldown": "无"
     },
     {
@@ -280,7 +271,6 @@
       "category": "抗性",
       "rarity": "★★★",
       "stack": 64,
-      "price": "500曙光灵石",
       "cooldown": "无"
     },
     {
@@ -289,7 +279,6 @@
       "category": "抗性",
       "rarity": "★★★",
       "stack": 64,
-      "price": "500曙光灵石",
       "cooldown": "无"
     },
     {
@@ -298,7 +287,8 @@
       "category": "特殊",
       "rarity": "★★★★",
       "stack": 64,
-      "price": "魔法师协会购买",
+      "price": "500曙光灵石",
+      "obtain": "魔法师协会购买",
       "cooldown": "无"
     },
     {
@@ -307,7 +297,8 @@
       "category": "宝箱",
       "rarity": "★★★★",
       "stack": 64,
-      "price": "活动奖励",
+      "price": "200贡献点",
+      "obtain": "活动奖励",
       "cooldown": "无",
       "note": "局外使用"
     },
@@ -317,7 +308,8 @@
       "category": "宝箱",
       "rarity": "★★★",
       "stack": 64,
-      "price": "活动奖励",
+      "price": "100贡献点",
+      "obtain": "活动奖励",
       "cooldown": "无",
       "note": "局外使用"
     },
@@ -327,7 +319,8 @@
       "category": "宝箱",
       "rarity": "★★",
       "stack": 64,
-      "price": "活动奖励",
+      "price": "50贡献点",
+      "obtain": "活动奖励",
       "cooldown": "无",
       "note": "局外使用"
     },
@@ -337,7 +330,8 @@
       "category": "特殊",
       "rarity": "★★★",
       "stack": 64,
-      "price": "活动获取",
+      "price": "",
+      "obtain": "活动获取",
       "cooldown": "无"
     },
     {
@@ -346,7 +340,8 @@
       "category": "恢复",
       "rarity": "★★★★",
       "stack": 64,
-      "price": "稀有掉落",
+      "price": "4贡献点",
+      "obtain": "稀有掉落",
       "cooldown": "无"
     },
     {
@@ -355,7 +350,8 @@
       "category": "材料",
       "rarity": "★★★★",
       "stack": 64,
-      "price": "稀有掉落",
+      "price": "20贡献点",
+      "obtain": "稀有掉落",
       "cooldown": "无"
     },
     {
@@ -364,7 +360,8 @@
       "category": "材料",
       "rarity": "★★★★",
       "stack": 64,
-      "price": "稀有掉落",
+      "price": "20贡献点",
+      "obtain": "稀有掉落",
       "cooldown": "无"
     },
     {
@@ -373,7 +370,8 @@
       "category": "材料",
       "rarity": "★★★★",
       "stack": 64,
-      "price": "稀有掉落",
+      "price": "20贡献点",
+      "obtain": "稀有掉落",
       "cooldown": "无"
     },
     {
@@ -382,7 +380,8 @@
       "category": "特殊",
       "rarity": "★★★★★",
       "stack": 64,
-      "price": "渊之魔女掉落",
+      "price": "240贡献点",
+      "obtain": "渊之魔女掉落",
       "cooldown": "无",
       "note": "用于高级突破"
     },
@@ -392,7 +391,8 @@
       "category": "特殊",
       "rarity": "★★★★★",
       "stack": 64,
-      "price": "Boss掉落(3%概率)",
+      "price": "130贡献点",
+      "obtain": "Boss掉落(3%概率)",
       "cooldown": "无"
     }
   ],
