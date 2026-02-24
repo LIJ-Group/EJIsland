@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ejisland-v5';
+const CACHE_NAME = 'ejisland-v6';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
