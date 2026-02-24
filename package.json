@@ -1,0 +1,11 @@
+{
+  "name": "ejisland",
+  "version": "1.0.0",
+  "description": "异界之岛 Wiki",
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "npx http-server EJIsland -p 8000 -c-1"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

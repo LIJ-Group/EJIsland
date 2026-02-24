@@ -1,7 +1,7 @@
 import { handleResize } from './utils.js';
-import { loadAllData } from './data.js';
+import { loadAllData, loadSectionData } from './data.js';
 import { renderAreas, renderWeapons, renderArmors, renderBossEnemies, renderNormalEnemies, renderItems, renderDamage, renderElement, renderSkills, renderGrowth, renderQuests, renderTips, renderUpload, renderReview, renderBosses, renderTeleports, toggleCode } from './renderer.js';
-import { initPagination } from './pagination.js';
+import { initPagination, refreshAllPagination } from './pagination.js';
 import { initSearchEventListeners } from './search.js';
 import { initUI } from './ui.js';
 
@@ -63,14 +63,31 @@ async function initApp() {
     checkAdminAccess();
     
     try {
-        await loadAllData();
+        await loadSectionData('areas');
+        renderAreas();
         
-        scheduleRender(renderAreas, 10);
-        scheduleRender(renderBossEnemies, 9);
-        scheduleRender(renderWeapons, 8);
-        scheduleRender(renderArmors, 7);
-        scheduleRender(renderNormalEnemies, 6);
-        scheduleRender(renderItems, 5);
+        await Promise.all([
+            loadSectionData('weapons'),
+            loadSectionData('armors'),
+            loadSectionData('items'),
+            loadSectionData('enemies'),
+            loadSectionData('bosses'),
+            loadSectionData('teleports'),
+            loadSectionData('elements'),
+            loadSectionData('skills'),
+            loadSectionData('quests')
+        ]);
+        
+        renderWeapons();
+        renderArmors();
+        renderItems();
+        renderBossEnemies();
+        renderNormalEnemies();
+        renderBosses();
+        renderTeleports();
+        
+        initPagination();
+        
         scheduleRender(renderDamage, 4);
         scheduleRender(renderElement, 3);
         scheduleRender(renderSkills, 2);
@@ -83,7 +100,6 @@ async function initApp() {
         scheduleRender(renderReview, 0);
         
         requestAnimationFrame(() => {
-            initPagination();
             initSearchEventListeners();
             initUI();
         });
@@ -97,3 +113,34 @@ async function initApp() {
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('SW registered:', registration.scope);
+            })
+            .catch((error) => {
+                console.log('SW registration failed:', error);
+            });
+    });
+}
+
+const sectionDataMap = {
+    'areas': { dataName: 'areas', render: renderAreas, loaded: true },
+    'echo-lands': { dataName: 'areas', render: renderAreas, loaded: true },
+    'enemies': { dataName: 'enemies', render: () => { renderBossEnemies(); renderNormalEnemies(); }, loaded: false },
+    'weapons': { dataName: 'weapons', render: renderWeapons, loaded: false },
+    'armor': { dataName: 'armors', render: renderArmors, loaded: false },
+    'items': { dataName: 'items', render: renderItems, loaded: false },
+    'damage': { dataName: 'elements', render: renderDamage, loaded: false },
+    'element': { dataName: 'elements', render: renderElement, loaded: false },
+    'skills': { dataName: 'skills', render: renderSkills, loaded: false },
+    'growth': { dataName: 'quests', render: renderGrowth, loaded: false },
+    'quests': { dataName: 'quests', render: renderQuests, loaded: false },
+    'bosses': { dataName: 'bosses', render: renderBosses, loaded: false },
+    'teleports': { dataName: 'teleports', render: renderTeleports, loaded: false },
+    'tips': { dataName: 'quests', render: renderTips, loaded: false },
+    'upload': { dataName: 'quests', render: renderUpload, loaded: false },
+    'review': { dataName: 'quests', render: renderReview, loaded: false }
+};

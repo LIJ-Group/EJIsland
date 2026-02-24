@@ -6,6 +6,20 @@
     <title>异界之岛 - 旅行者指南</title>
     <link rel="icon" href="public/images/favicon.png" type="image/png">
     <link rel="stylesheet" href="public/css/style.css">
+    <script>
+        (function() {
+            const MIN_INTERVAL = 10000;
+            const lastAccess = localStorage.getItem('lastAccess');
+            const now = Date.now();
+            
+            if (lastAccess && (now - parseInt(lastAccess)) < MIN_INTERVAL) {
+                window.location.href = '/toofast.html';
+                return;
+            }
+            
+            localStorage.setItem('lastAccess', now);
+        })();
+    </script>
 </head>
 <body>
     <button class="menu-toggle" id="menuToggle">
@@ -101,6 +115,9 @@
                 <p>异界之岛上栖息着各种危险的敌人，了解它们的特性才能更好地战斗。</p>
 
                 <h3>普通敌人</h3>
+                <div class="enemy-grid" id="normal-enemies">
+                    <!-- 普通敌人卡片将在这里动态生成 -->
+                </div>
 
                 <h3>Boss敌人</h3>
                 <div class="enemy-grid" id="boss-enemies">

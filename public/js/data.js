@@ -230,6 +230,7 @@ export async function loadQuestData() {
 }
 
 let dataLoaded = false;
+const loadedSections = new Set();
 
 export async function loadAllData() {
     if (dataLoaded) return;
@@ -249,4 +250,29 @@ export async function loadAllData() {
     ]);
     
     dataLoaded = true;
+}
+
+export async function loadSectionData(sectionName) {
+    if (loadedSections.has(sectionName)) return;
+    
+    const loadFunctions = {
+        'areas': loadAreaData,
+        'weapons': loadWeaponData,
+        'armors': loadArmorData,
+        'enemies': loadEnemyData,
+        'items': loadItemData,
+        'elements': loadElementData,
+        'elementReactions': loadElementReactionData,
+        'skills': loadSkillData,
+        'quests': loadQuestData,
+        'bosses': loadBossData,
+        'teleports': loadTeleportData
+    };
+    
+    const loadFn = loadFunctions[sectionName];
+    if (loadFn) {
+        await loadFn();
+        loadedSections.add(sectionName);
+        window.dispatchEvent(new CustomEvent('dataLoaded', { detail: { section: sectionName } }));
+    }
 }
