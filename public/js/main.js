@@ -89,10 +89,12 @@ async function initApp() {
         
         initPagination();
         
+        // 直接调用成长系统和技能系统渲染
+        renderGrowth();
+        renderSkills();
+        
         scheduleRender(renderDamage, 4);
         scheduleRender(renderElement, 3);
-        scheduleRender(renderSkills, 2);
-        scheduleRender(renderGrowth, 1);
         scheduleRender(renderQuests, 0);
         scheduleRender(renderBosses, 0);
         scheduleRender(renderTeleports, 0);
