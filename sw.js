@@ -1,8 +1,8 @@
-const CACHE_NAME = 'ejisland-v7';
+const CACHE_NAME = 'ejisland-v8';
 const STATIC_ASSETS = [
     '/EJIsland/',
     '/EJIsland/index.html',
-    '/EJIsland/public/css/style.css',
+    '/EJIsland/public/css/style.v2.css',
     '/EJIsland/public/images/LOGO.png',
     '/EJIsland/public/images/backGround.webp',
     '/EJIsland/public/images/favicon.png'
