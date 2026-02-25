@@ -74,6 +74,7 @@ async function initApp() {
             loadSectionData('bosses'),
             loadSectionData('teleports'),
             loadSectionData('elements'),
+            loadSectionData('elementReactions'),
             loadSectionData('skills'),
             loadSectionData('quests')
         ]);

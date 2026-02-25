@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>请稍候 - 异界之岛</title>
-    <link rel="icon" href="public/images/favicon.png" type="image/png">
+    <link rel="icon" href="./public/images/favicon.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -307,8 +307,8 @@
             
             if (seconds <= 0) {
                 clearInterval(interval);
-                localStorage.removeItem('lastAccess');
-                window.location.href = '/EJIsland/';
+                localStorage.setItem('waited', 'true');
+                window.location.href = './';
             }
         }, 1000);
     </script>

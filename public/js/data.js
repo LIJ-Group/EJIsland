@@ -104,7 +104,7 @@ export const gameData = {
 
 export async function loadWeaponData() {
     try {
-        const data = await fetchWithCache("public/data/weapons.json");
+        const data = await fetchWithCache("./public/data/weapons.json");
         gameData.setWeapons(data);
         paginationConfig.weapons.totalItems = data.length;
         return data;
@@ -116,7 +116,7 @@ export async function loadWeaponData() {
 
 export async function loadArmorData() {
     try {
-        const data = await fetchWithCache("public/data/armors.json");
+        const data = await fetchWithCache("./public/data/armors.json");
         gameData.setArmors(data);
         paginationConfig.armors.totalItems = data.length;
         return data;
@@ -128,7 +128,7 @@ export async function loadArmorData() {
 
 export async function loadEnemyData() {
     try {
-        const data = await fetchWithCache("public/data/enemies.json");
+        const data = await fetchWithCache("./public/data/enemies.json");
         gameData.setEnemies(data);
         const normalEnemies = data.filter(enemy => !enemy.boss && !enemy.elite && enemy.type === '普通');
         paginationConfig.enemies.totalItems = normalEnemies.length;
@@ -141,7 +141,7 @@ export async function loadEnemyData() {
 
 export async function loadItemData() {
     try {
-        const data = await fetchWithCache("public/data/items.json");
+        const data = await fetchWithCache("./public/data/items.json");
         gameData.setItems(data);
         paginationConfig.consumables.totalItems = data.consumables?.length || 0;
         paginationConfig.materials.totalItems = data.materials?.length || 0;
@@ -154,7 +154,7 @@ export async function loadItemData() {
 
 export async function loadAreaData() {
     try {
-        const data = await fetchWithCache("public/data/areas.json");
+        const data = await fetchWithCache("./public/data/areas.json");
         gameData.setAreas(data);
         return data;
     } catch (error) {
@@ -165,7 +165,7 @@ export async function loadAreaData() {
 
 export async function loadBossData() {
     try {
-        const data = await fetchWithCache("public/data/bosses.json");
+        const data = await fetchWithCache("./public/data/bosses.json");
         gameData.setBosses(data);
         return data;
     } catch (error) {
@@ -176,7 +176,7 @@ export async function loadBossData() {
 
 export async function loadTeleportData() {
     try {
-        const data = await fetchWithCache("public/data/teleports.json");
+        const data = await fetchWithCache("./public/data/teleports.json");
         gameData.setTeleports(data);
         return data;
     } catch (error) {
@@ -187,7 +187,7 @@ export async function loadTeleportData() {
 
 export async function loadElementData() {
     try {
-        const data = await fetchWithCache("public/data/elements.json");
+        const data = await fetchWithCache("./public/data/elements.json");
         gameData.setElements(data);
         return data;
     } catch (error) {
@@ -198,7 +198,7 @@ export async function loadElementData() {
 
 export async function loadElementReactionData() {
     try {
-        const data = await fetchWithCache("public/data/elementReactions.json");
+        const data = await fetchWithCache("./public/data/elementReactions.json");
         gameData.setElementReactions(data);
         return data;
     } catch (error) {
@@ -209,7 +209,7 @@ export async function loadElementReactionData() {
 
 export async function loadSkillData() {
     try {
-        const data = await fetchWithCache("public/data/skills.json");
+        const data = await fetchWithCache("./public/data/skills.json");
         gameData.setSkills(data);
         return data;
     } catch (error) {
@@ -220,7 +220,7 @@ export async function loadSkillData() {
 
 export async function loadQuestData() {
     try {
-        const data = await fetchWithCache("public/data/quests.json");
+        const data = await fetchWithCache("./public/data/quests.json");
         gameData.setQuests(data);
         return data;
     } catch (error) {

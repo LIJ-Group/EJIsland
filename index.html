@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>异界之岛 - 旅行者指南</title>
-    <link rel="icon" href="public/images/favicon.png" type="image/png">
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="icon" href="./public/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="./public/css/style.css">
     <script>
         (function() {
             const MIN_INTERVAL = 10000;
             const lastAccess = localStorage.getItem('lastAccess');
+            const waited = localStorage.getItem('waited');
             const now = Date.now();
             
+            // 如果已经等待过了，重置标记并继续
+            if (waited === 'true') {
+                localStorage.removeItem('waited');
+                localStorage.setItem('lastAccess', now);
+                return;
+            }
+            
             if (lastAccess && (now - parseInt(lastAccess)) < MIN_INTERVAL) {
-                window.location.href = '/EJIsland/toofast.html';
+                window.location.replace('./toofast.html');
                 return;
             }
             
@@ -31,7 +39,7 @@
     <div class="wrapper">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <img src="public/images/LOGO.png" alt="异界之岛 Logo" class="logo">
+                <img src="./public/images/LOGO.png" alt="异界之岛 Logo" class="logo">
                 <h1>异界之岛</h1>
                 <p>旅行者指南</p>
             </div>
@@ -70,7 +78,7 @@
 
         <main class="main-content">
             <div class="intro-logo-container">
-                <img src="public/images/LOGO.png" alt="异界之岛 Logo" class="intro-logo">
+                <img src="./public/images/LOGO.png" alt="异界之岛 Logo" class="intro-logo">
             </div>
 
             <section id="intro">
@@ -252,6 +260,10 @@
                         <span class="chip-label">Wiki作者</span>
                         <span class="chip-value">LIJ-Group</span>
                     </div>
+                    <div class="credits-chip">
+                        <span class="chip-label">大坏蛋</span>
+                        <span class="chip-value">半仙</span>
+                    </div>
                 </div>
             </section>
         </main>
@@ -259,7 +271,7 @@
 
     <div class="back-to-top" onclick="scrollToTopWithAnimation()"></div>
 
-    <script src="public/js/main.js" type="module"></script>
+    <script src="./public/js/main.js" type="module"></script>
 </body>
 </html>
 
