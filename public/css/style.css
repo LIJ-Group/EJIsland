@@ -2740,6 +2740,11 @@
             box-shadow: 0 8px 32px rgba(139, 69, 19, 0.15);
         }
 
+        #credits {
+            position: relative;
+            z-index: 20;
+        }
+
         .disabled-message-icon {
             width: 48px;
             height: 48px;
